@@ -1,0 +1,1591 @@
+<!doctype html>
+<html lang="ps" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#14213a" />
+    <link rel="manifest" href="assets/manifest.webmanifest" />
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/icon-512.png" />
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="د بازار نرخونه" />
+    <title>د افغانستان د بازار نرخونه — صرافي، ډیجیټل کرنسي، سره زر او تېل</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+      button, [role="button"], select, summary, input:not([type="checkbox"], [type="radio"]) { min-height: 2.25rem; }
+      * { box-sizing: border-box; }
+      :root{
+        --bg:#f4f1ea; --bg2:#ece7db; --card:#fffdf8; --card2:#f8f4ec;
+        --ink:#1d1a14; --ink2:#5c5546; --line:#ddd3bf;
+        --gold:#a87b12; --gold2:#c99a1d; --goldsoft:#f3e7c3;
+        --green:#177a3d; --red:#b3271e;
+        --navy:#14213a; --navyink:#eef1f7;
+        --chip:#efe9da;
+        --shadow:0 1px 3px rgba(60,45,10,.10),0 8px 24px rgba(60,45,10,.07);
+      }
+      @media (prefers-color-scheme: dark){
+        :root{
+          --bg:#0d1117; --bg2:#0a0d12; --card:#161c26; --card2:#1b2230;
+          --ink:#ece7da; --ink2:#a49a83; --line:#2b3446;
+          --gold:#d9a92c; --gold2:#e8bc45; --goldsoft:#2a2410;
+          --green:#3fb96f; --red:#e5604f;
+          --navy:#0a0f1e; --navyink:#eef1f7;
+          --chip:#202839;
+          --shadow:0 1px 3px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.3);
+        }
+      }
+      html{ scroll-behavior:smooth; }
+      body{
+        margin:0; background:linear-gradient(180deg,var(--bg),var(--bg2));
+        color:var(--ink);
+        font-family:"Vazirmatn", system-ui, "Segoe UI", Tahoma, sans-serif;
+        line-height:1.75; font-size:16px;
+      }
+      .num{ font-variant-numeric:tabular-nums; direction:ltr; unicode-bidi:embed; letter-spacing:.1px; }
+      .en{ direction:ltr; unicode-bidi:embed; }
+      a{ color:var(--gold); }
+      .wrap{ max-width:1180px; margin:0 auto; padding:0 16px 56px; }
+
+      /* ---------- ticker ---------- */
+      .tickerbar{ background:var(--navy); color:var(--navyink); overflow:hidden; border-bottom:3px solid var(--gold2); }
+      .ticker{ display:flex; gap:0; width:max-content; animation:tick 55s linear infinite; padding:7px 0; }
+      .tickerbar:hover .ticker{ animation-play-state:paused; }
+      @keyframes tick{ from{ transform:translateX(0);} to{ transform:translateX(50%);} }
+      @media (prefers-reduced-motion: reduce){ .ticker{ animation:none; flex-wrap:wrap; width:auto; } html{scroll-behavior:auto;} }
+      .tk{ display:inline-flex; align-items:center; gap:8px; padding:0 18px; font-size:.86rem; white-space:nowrap; border-inline-start:1px solid rgba(255,255,255,.14); }
+      .tk b{ font-weight:800; }
+      .up{ color:#39d17c; } .down{ color:#ff7a5c; }
+      @media (prefers-color-scheme: light){ .up{ color:#2fbf71; } .down{ color:#ff8a70; } }
+
+      /* ---------- header ---------- */
+      header.hero{ padding:26px 0 6px; }
+      .hero h1{ margin:0 0 4px; font-size:clamp(1.55rem,4.5vw,2.4rem); font-weight:900; line-height:1.35; }
+      .hero h1 .accent{ color:var(--gold); }
+      .hero p.lede{ margin:0; color:var(--ink2); max-width:62ch; font-size:1.02rem; }
+      .asof{ display:inline-flex; align-items:center; gap:8px; margin-top:12px; background:var(--goldsoft); color:var(--ink); border:1px solid var(--line); border-radius:999px; padding:4px 14px; font-size:.85rem; font-weight:700; }
+      .dot{ width:9px; height:9px; border-radius:50%; background:var(--green); box-shadow:0 0 0 4px color-mix(in srgb, var(--green) 22%, transparent); }
+
+      /* ---------- nav ---------- */
+      nav.sections{ position:sticky; top:0; z-index:20; background:color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); margin:18px -16px 0; padding:8px 16px; }
+      nav.sections ul{ display:flex; gap:8px; flex-wrap:wrap; list-style:none; margin:0; padding:0; }
+      nav.sections a{ display:inline-flex; align-items:center; min-height:2.25rem; padding:4px 16px; border-radius:999px; background:var(--chip); color:var(--ink); text-decoration:none; font-weight:700; font-size:.92rem; border:1px solid var(--line); }
+      nav.sections a:hover{ background:var(--goldsoft); border-color:var(--gold2); }
+
+      section{ margin-top:38px; scroll-margin-top:76px; }
+      .sec-head{ display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; border-bottom:2px solid var(--gold2); padding-bottom:8px; margin-bottom:16px; }
+      .sec-head h2{ margin:0; font-size:1.45rem; font-weight:900; }
+      .sec-head .sub{ color:var(--ink2); font-size:.9rem; }
+      .sec-head .lat{ margin-inline-start:auto; font-size:.8rem; color:var(--ink2); direction:ltr; }
+
+      .grid{ display:grid; gap:14px; }
+      .g2{ grid-template-columns:repeat(2,1fr); }
+      .g3{ grid-template-columns:repeat(3,1fr); }
+      @media (max-width:900px){ .g3{ grid-template-columns:repeat(2,1fr);} }
+      @media (max-width:620px){ .g2,.g3{ grid-template-columns:1fr; } }
+      .card{ background:var(--card); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); padding:16px 18px; }
+      .card h3{ margin:0 0 6px; font-size:1.08rem; font-weight:800; }
+      .card p{ margin:6px 0; color:var(--ink2); font-size:.94rem; }
+      .card p strong{ color:var(--ink); }
+
+      /* ---------- rates table ---------- */
+      .tablewrap{ background:var(--card); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); overflow:hidden; }
+      table{ width:100%; border-collapse:collapse; font-size:.97rem; }
+      th,td{ padding:11px 14px; text-align:right; }
+      thead th{ background:var(--card2); font-weight:800; border-bottom:2px solid var(--gold2); font-size:.9rem; }
+      tbody tr{ border-bottom:1px solid var(--line); }
+      tbody tr:last-child{ border-bottom:none; }
+      tbody tr:hover{ background:var(--card2); }
+      td.rate{ font-weight:800; font-size:1.05rem; }
+      .cur{ display:flex; align-items:center; gap:10px; font-weight:700; }
+      .flag{ width:34px; height:34px; flex:0 0 34px; border-radius:9px; background:var(--goldsoft); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-weight:900; font-size:.68rem; color:var(--gold); direction:ltr; }
+      .chg{ font-weight:800; font-size:.88rem; }
+      .chg.up{ color:var(--green); } .chg.down{ color:var(--red); }
+      @media (max-width:620px){
+        table, thead, tbody, tr, td{ display:block; }
+        thead{ display:none; }
+        tbody tr{ padding:10px 4px; }
+        td{ padding:3px 14px; border:none; }
+        td.rate{ font-size:1.15rem; }
+        td.lbl::before{ content:attr(data-l) "："; color:var(--ink2); font-size:.82rem; font-weight:700; }
+      }
+      .note{ font-size:.86rem; color:var(--ink2); margin-top:10px; }
+      .src{ font-size:.8rem; color:var(--ink2); }
+      .src a{ color:var(--ink2); text-decoration:underline; }
+
+      /* ---------- city cards ---------- */
+      .city .pairs{ margin-top:8px; display:grid; gap:6px; }
+      .pair{ display:flex; justify-content:space-between; gap:10px; background:var(--card2); border:1px solid var(--line); border-radius:9px; padding:6px 12px; font-size:.92rem; }
+      .pair b{ font-weight:800; }
+      .tag{ display:inline-block; background:var(--goldsoft); border:1px solid var(--line); color:var(--ink); border-radius:999px; padding:0 10px; font-size:.76rem; font-weight:700; }
+
+      /* ---------- converter ---------- */
+      .conv{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; align-items:end; }
+      @media (max-width:900px){ .conv{ grid-template-columns:1fr 1fr; } }
+      @media (max-width:620px){ .conv{ grid-template-columns:1fr; } }
+      .conv label{ display:block; font-weight:700; font-size:.9rem; margin-bottom:4px; }
+      .conv input,.conv select{ width:100%; padding:8px 12px; border-radius:10px; border:1px solid var(--line); background:var(--card2); color:var(--ink); font:inherit; font-size:1rem; }
+      .conv .out{ background:var(--goldsoft); border:1px solid var(--gold2); border-radius:10px; padding:8px 14px; font-weight:900; font-size:1.15rem; min-height:2.9rem; display:flex; align-items:center; }
+
+      /* ---------- crypto ---------- */
+      .coin{ display:flex; flex-direction:column; gap:4px; }
+      .coin .top{ display:flex; align-items:center; gap:12px; }
+      .coin .sym{ width:46px; height:46px; flex:0 0 46px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:1.05rem; color:#fff; direction:ltr; }
+      .coin .price{ font-size:1.5rem; font-weight:900; line-height:1.2; }
+      .coin .meta{ display:flex; gap:14px; flex-wrap:wrap; font-size:.86rem; color:var(--ink2); }
+      .coin details{ margin-top:8px; border-top:1px dashed var(--line); padding-top:8px; }
+      .coin summary{ cursor:pointer; font-weight:800; color:var(--gold); padding:4px 0; }
+      .coin details p{ font-size:.92rem; }
+      .coin details b{ color:var(--ink); }
+      .spark{ margin-top:6px; }
+      .why{ border-inline-start:4px solid var(--red); background:var(--card); }
+      .why.up-b{ border-inline-start-color:var(--green); }
+
+      /* ---------- gems / fuel ---------- */
+      .bigprice{ font-size:1.6rem; font-weight:900; line-height:1.3; }
+      .unit{ color:var(--ink2); font-size:.88rem; font-weight:500; }
+      .range{ font-weight:800; }
+
+      /* ---------- outlook ---------- */
+      .outlook .dir{ font-weight:900; font-size:1.02rem; }
+      .meter{ height:8px; border-radius:99px; background:var(--chip); overflow:hidden; margin:8px 0 4px; }
+      .meter i{ display:block; height:100%; background:var(--gold2); border-radius:99px; }
+
+      /* ---------- pages / tabs ---------- */
+      .page{ display:none; }
+      .page.active{ display:block; }
+      nav.sections button{ display:inline-flex; align-items:center; min-height:2.25rem; padding:4px 16px; border-radius:999px; background:var(--chip); color:var(--ink); font:inherit; font-weight:700; font-size:.92rem; border:1px solid var(--line); cursor:pointer; }
+      nav.sections button:hover{ background:var(--goldsoft); border-color:var(--gold2); }
+      nav.sections button.active{ background:var(--gold2); border-color:var(--gold2); color:#fff; }
+      .tvgrid{ display:grid; gap:14px; grid-template-columns:repeat(3,1fr); }
+      @media (max-width:900px){ .tvgrid{ grid-template-columns:repeat(2,1fr); } }
+      @media (max-width:620px){ .tvgrid{ grid-template-columns:1fr; } }
+      .tvbox{ background:var(--navy); border:1px solid var(--line); border-radius:14px; overflow:hidden; min-height:220px; }
+      .livestat{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:12px; font-size:.9rem; color:var(--ink2); }
+      .livestat .when{ font-weight:700; color:var(--ink); }
+      .livegrid{ display:grid; gap:12px; grid-template-columns:repeat(3,1fr); margin-bottom:14px; }
+      @media (max-width:900px){ .livegrid{ grid-template-columns:repeat(2,1fr); } }
+      @media (max-width:620px){ .livegrid{ grid-template-columns:1fr; } }
+      .livecard{ background:var(--card); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); padding:12px 16px; display:flex; align-items:center; gap:12px; }
+      .livecard .sym{ width:44px; height:44px; flex:0 0 44px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:.82rem; color:#fff; direction:ltr; }
+      .livecard .nm{ font-weight:800; font-size:.98rem; line-height:1.4; }
+      .livecard .pr{ font-size:1.3rem; font-weight:900; line-height:1.25; }
+      .livecard .ch{ font-weight:800; font-size:.88rem; }
+      .livecard .ch.up{ color:var(--green); } .livecard .ch.down{ color:var(--red); }
+      .chipbtn{ padding:4px 14px; border-radius:999px; border:1px solid var(--line); background:var(--chip); color:var(--ink); font:inherit; font-weight:700; font-size:.88rem; cursor:pointer; }
+      .chipbtn:hover{ background:var(--goldsoft); border-color:var(--gold2); }
+      .adslot{ border:1.5px dashed var(--gold2); border-radius:12px; padding:22px 16px; text-align:center; color:var(--ink2); background:var(--card2); font-weight:700; margin-top:14px; }
+
+      footer{ margin-top:44px; border-top:1px solid var(--line); padding-top:16px; color:var(--ink2); font-size:.86rem; }
+      footer h3{ color:var(--ink); margin:0 0 6px; font-size:1rem; }
+      .warn{ background:var(--card); border:1px solid var(--gold2); border-radius:12px; padding:12px 16px; margin-top:14px; }
+
+      /* ---------- site search ---------- */
+      .searchbox{ margin-top:18px; background:var(--card); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); padding:14px 16px; }
+      .searchbox label{ display:block; font-weight:900; font-size:1.05rem; margin-bottom:6px; }
+      .searchbox input{ width:100%; padding:9px 14px; border-radius:10px; border:1px solid var(--line); background:var(--card2); color:var(--ink); font:inherit; font-size:1rem; }
+      .searchbox input:focus{ outline:2px solid var(--gold2); outline-offset:1px; }
+      .searchresults{ display:grid; gap:6px; margin-top:10px; }
+      .searchresult{ display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; text-align:right; width:100%; padding:8px 12px; border-radius:10px; border:1px solid var(--line); background:var(--card2); color:var(--ink); font:inherit; cursor:pointer; }
+      .searchresult:hover{ background:var(--goldsoft); border-color:var(--gold2); }
+      .searchresult b{ font-weight:800; font-size:.97rem; }
+      .searchresult span{ color:var(--ink2); font-size:.82rem; }
+      .searchnone{ margin:10px 0 0; color:var(--ink2); font-size:.92rem; font-weight:700; }
+      .search-hit{ animation:hitflash 2.6s ease; border-radius:8px; }
+      @keyframes hitflash{ 0%,55%{ background:var(--goldsoft); box-shadow:0 0 0 3px var(--gold2); } 100%{ background:transparent; box-shadow:none; } }
+      @media (prefers-reduced-motion: reduce){ .search-hit{ animation:none; box-shadow:0 0 0 3px var(--gold2); } }
+
+      /* ---------- offline note ---------- */
+      .offlinenote{ display:none; margin-top:12px; background:var(--goldsoft); border:1px solid var(--gold2); border-radius:10px; padding:7px 14px; font-size:.88rem; font-weight:700; max-width:640px; }
+      .offlinenote.show{ display:block; }
+    </style>
+  </head>
+  <body>
+
+    <!-- ======= Ticker (snapshot of 23 Nov 2026) ======= -->
+    <div class="tickerbar" aria-label="د نرخونو لنډیز">
+      <div class="ticker" id="ticker"></div>
+    </div>
+
+    <div class="wrap">
+      <header class="hero">
+        <h1>د افغانستان د بازار نرخونه <span class="accent">— صرافي، ډیجیټل کرنسي، سره زر او تېل</span></h1>
+        <p class="lede">د سرای شهزاده او د هېواد د مهمو ښارونو د اسعارو نرخونه، د ډیجیټل کرنسیو نرخونه او معلومات، د سرو زرو، سپینو زرو او قیمتي ډبرو نرخونه، او د ډیزلو او پټرولو بیې — ټول په یوه ځای کې، د تاجرانو او صرافانو لپاره. هره برخه جلا پاڼه ده — له پورته یې وټاکئ.</p>
+        <span class="asof"><span class="dot"></span> وروستی تازه معلومات: دوشنبه، د ۲۰۲۶ کال د نومبر ۲۳مه — د کابل په وخت ۱۰:۳۹ (د سرچینو نومونه د هرې برخې لاندې لیکل شوي)</span>
+        <p class="offlinenote" id="offlineNote" role="status"></p>
+      </header>
+
+      <!-- ======= SEARCH ======= -->
+      <div class="searchbox" id="searchBox" role="search">
+        <label for="siteSearch">لټون</label>
+        <input id="siteSearch" type="search" placeholder="نوم ولیکئ — ډالر، کابل، بټکوین، BTC، سره زر، پټرول…" autocomplete="off" />
+        <div class="searchresults" id="searchResults" hidden></div>
+        <p class="searchnone" id="searchNone" hidden>هېڅ ونه موندل شو — بل نوم یا یې انګلیسي نوم / لنډیز هڅه وکړئ.</p>
+      </div>
+
+      <nav class="sections" aria-label="برخې">
+        <ul>
+          <li><button type="button" class="tabbtn active" data-page="sarafi">صرافي او ښارونه</button></li>
+          <li><button type="button" class="tabbtn" data-page="crypto">ډیجیټل کرنسي</button></li>
+          <li><button type="button" class="tabbtn" data-page="coins">د ډیجیټل کرنسیو معلومات</button></li>
+          <li><button type="button" class="tabbtn" data-page="metals">سره زر او پیمانه</button></li>
+          <li><button type="button" class="tabbtn" data-page="fuel">تېل</button></li>
+          <li><button type="button" class="tabbtn" data-page="outlook">شننه او معلومات</button></li>
+          <li><button type="button" class="tabbtn" data-page="sources">سرچینې</button></li>
+          <li><button type="button" class="tabbtn" data-page="about">زموږ په اړه</button></li>
+          <li><button type="button" id="searchNavBtn">لټون</button></li>
+        </ul>
+      </nav>
+
+      <!-- ======= SARAFI ======= -->
+      <section id="sarafi">
+        <div class="sec-head">
+          <h2>د صرافي نرخونه — اسعار د افغانۍ پر وړاندې</h2>
+          <span class="sub">هر نرخ په درې اسعارو: افغانۍ (اصلي)، ډالر او کلدارې — ۱ ډالر = ۶۶.۰۴۵ افغانۍ = ۲۸۲.۵ کلدارې</span>
+          <span class="lat">Currency Rates vs AFN</span>
+          <span class="tag upd"></span>
+        </div>
+
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr><th>اسعار</th><th>نرخ (افغانۍ)</th><th>په ډالرو (USD)</th><th>په کلدارو (PKR)</th><th>د کابل بازار / سرای شهزاده</th><th>یادونه</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="cur"><span class="flag">USD</span> امریکايي ډالر <span class="en">US Dollar</span></span></td>
+                <td class="rate num lbl" data-l="پلورل — سرای شهزاده">66.045</td>
+                <td class="num lbl" data-l="په ډالرو">$1.00</td>
+                <td class="num lbl" data-l="په کلدارو">281.0</td>
+                <td class="lbl" data-l="سرای شهزاده"><b class="num">اخیستل 66.43 / پلورل 66.045</b> — د افغانستان بانک (DAB) رسمي نغد نرخ: <b class="num">اخیستل 66.3400 / پلورل 66.5400</b></td>
+                <td>د هېواد تر ټولو مهم اسعار؛ د سرای شهزاده نرخ د ټول هېواد لپاره بنچمارک دی.</td>
+              </tr>
+              <tr>
+                <td><span class="cur"><span class="flag">EUR</span> یورو <span class="en">Euro</span></span></td>
+                <td class="rate num lbl" data-l="پلورل — سرای شهزاده">72.75</td>
+                <td class="num lbl" data-l="په ډالرو">$1.10</td>
+                <td class="num lbl" data-l="په کلدارو">309.6</td>
+                <td class="lbl" data-l="سرای شهزاده"><b class="num">اخیستل 72.65 / پلورل 72.75</b></td>
+                <td>د اروپا څخه د حوالو او سوداګرۍ لپاره ډېر کارېږي.</td>
+              </tr>
+              <tr>
+                <td><span class="cur"><span class="flag">PKR</span> پاکستانۍ کلدارې <span class="en">Pakistani Rupee</span></span></td>
+                <td class="rate num lbl" data-l="نرخ">0.235</td>
+                <td class="num lbl" data-l="په ډالرو (۱۰۰۰ کلدارې)">$3.56 <span class="src">(د ۱۰۰۰ لپاره)</span></td>
+                <td class="num lbl" data-l="په کلدارو">1,000</td>
+                <td class="lbl" data-l="سرای شهزاده">په سرای شهزاده کې ۱۰۰۰ کلدارې: <b class="num">اخیستل 235 / پلورل 235</b> — برعکس: ۱ افغانی = <span class="num">4.26</span> کلدارې</td>
+                <td>په کندهار، جلال‌اباد او پوله‌ییزو ښارونو کې تر ټولو ډېر چلېږي.</td>
+              </tr>
+              <tr>
+                <td><span class="cur"><span class="flag">IRR</span> ایراني تومان <span class="en">Iranian Toman</span></span></td>
+                <td class="rate num lbl" data-l="نرخ (په میلیون تومان)">۱ میلیون تومان = <span class="num">≈ 239</span> افغانۍ</td>
+                <td class="num lbl" data-l="۱ میلیون تومان په ډالرو">≈ $3.62</td>
+                <td class="num lbl" data-l="۱ میلیون تومان په کلدارو">≈ 1,017</td>
+                <td class="lbl" data-l="سرای شهزاده">تومان د نن ورځې (۲۳ نومبر ۲۰۲۶) د سرای شهزاده په فیسبوک خپرونه کې <b>نه و</b> — وروستی خپور شوی نرخ: <b class="num">≈ 239</b> افغانۍ په ۱ میلیون تومان (Afaaq، ۲۲ نومبر ۲۰۲۶). په سرای شهزاده کې تومان <b>په میلیون</b> حسابېږي او په درې ډوله چلېږي — <b>نغد، چیک او بانکي حواله</b> — او هر یو خپل نرخ لري.</td>
+                <td>په هرات او لوېدیځو ولایتونو کې اصلي بهرنی اسعار دی. په هرات کې ۱ ډالر ≈ <b class="num">273,200</b> تومان چلېږي (AlanChand). په ایران کې دننه (آزاد بازار) ۱ افغانی ≈ <span class="num">4,146–4,251</span> تومان دی — د افغانستان او ایران بازارونه بېل دي، ځکه یې نرخونه توپیر لري. ۱ لک = <span class="num">100,000</span> (سل زره) تومان.</td>
+              </tr>
+              <tr>
+                <td><span class="cur"><span class="flag">AED</span> د اماراتو درهم <span class="en">UAE Dirham</span></span></td>
+                <td class="rate num lbl" data-l="نرخ">18.10</td>
+                <td class="num lbl" data-l="په ډالرو">$0.27</td>
+                <td class="num lbl" data-l="په کلدارو">77.0</td>
+                <td class="lbl" data-l="سرای شهزاده"><b class="num">اخیستل 18.00 / پلورل 18.10</b> (د سرای شهزاده فیسبوک خپرونه، ۲۳ نومبر ۲۰۲۶) — sarafi.af: <b class="num">18.09</b> (۲۲ نومبر ۲۰۲۶، ماسپښین؛ نن یې نوی نېټه‌لرونکی نرخ نه دی تایید شوی)</td>
+                <td>د دوبۍ سوداګرۍ او حوالو لپاره مهم دی.</td>
+              </tr>
+              <tr>
+                <td><span class="cur"><span class="flag">SAR</span> سعودي ریال <span class="en">Saudi Riyal</span></span></td>
+                <td class="rate num lbl" data-l="نرخ">17.70</td>
+                <td class="num lbl" data-l="په ډالرو">$0.27</td>
+                <td class="num lbl" data-l="په کلدارو">75.3</td>
+                <td class="lbl" data-l="سرای شهزاده"><b class="num">اخیستل 17.60 / پلورل 17.70</b> (د سرای شهزاده فیسبوک خپرونه، ۲۳ نومبر ۲۰۲۶) — sarafi.af: <b class="num">17.71</b> (۲۲ نومبر ۲۰۲۶، ماسپښین؛ نن یې نوی نېټه‌لرونکی نرخ نه دی تایید شوی)</td>
+                <td>د حج، عمرې او سعودي حوالو لپاره ډېر کارېږي.</td>
+              </tr>
+              <tr>
+                <td><span class="cur"><span class="flag">USDT</span> ټیټر (ډیجیټل ډالر) <span class="en">Tether</span></span></td>
+                <td class="rate num lbl" data-l="نرخ">≈ 66.0</td>
+                <td class="num lbl" data-l="په ډالرو">$1.00</td>
+                <td class="num lbl" data-l="په کلدارو">280.7</td>
+                <td class="lbl" data-l="یادونه">د ډالر له نرخ سره تړلی ډیجیټل اسعار (stablecoin)</td>
+                <td>په ډیجیټل کرنسي برخه کې یې بشپړ معلومات شته.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">لومړی ستن د سرای شهزاده د پلورلو نرخ دی؛ کره اخیستل/پلورل په خپل ستن کې د نن ورځې (۲۳ نومبر ۲۰۲۶) له رسمي فیسبوک خپرونې څخه دي — لکه ډالر: اخیستل <b class="num">66.43</b>، پلورل <b class="num">66.045</b> افغانۍ (د پلورلو شمېره لکه څنګه چې خپره شوې ده — له اخیستلو ټیټه چاپ شوې)، په داسې حال کې چې د افغانستان بانک رسمي نغد نرخ اخیستل <b class="num">66.3400</b> / پلورل <b class="num">66.5400</b> دی. د راکړې ورکړې پر وخت وروستی نرخ له خپل صراف څخه بیا وپوښتئ.</p>
+        <p class="src">اصلي سرچینه: د سرای شهزاده رسمي فیسبوک پاڼه «نرخ اسعار سرای شهزاده» (<a href="https://www.facebook.com/bazarearz">د ۲۰۲۶ کال د نومبر ۲۳مې خپرونه</a>، ۰۶:۳۵ د کابل وخت — «نرخ اسعار روز تاریخ قوس 2/1405»). تومان په نننۍ خپرونه کې نه و — وروستی خپور شوی نرخ یې Afaaq دی (۲۲ نومبر ۲۰۲۶). sarafi.af نن نوی نېټه‌لرونکی نرخ نه دی تایید کړی — ښودل شوي نرخونه یې د ۲۲ نومبر ۲۰۲۶ د ماسپښین دي. کراس‌چېک: د افغانستان بانک (DAB) رسمي نرخونه، <a href="https://dab.gov.af">dab.gov.af</a> (وروستی تازه کېدل: ۲۳ نومبر ۲۰۲۶)؛ تومان/هرات: AlanChand.</p>
+      </section>
+
+      <!-- ======= CITIES ======= -->
+      <section id="cities">
+        <div class="sec-head">
+          <h2>د ښارونو او سرایونو نرخونه</h2>
+          <span class="sub">هر ښار خپل اصلي اسعار او خپل بازار لري</span>
+          <span class="lat">City Markets</span>
+        </div>
+        <div id="cityTables"></div>
+        <p class="note">هر ښار خپل جدول لري: د هر نرخ تر څنګ یې <b>سرچینه</b> او د <b>اخیستلو وخت</b> لیکل شوی، او د اخیستو او پلورلو ستنې جلا دي. کوم ښار چې کره ورځنی نرخ یې لا نه دی ترلاسه شوی، هلته شمېره نه لیکل کېږي — یوازې یادونه وي، تر څو نرخونه هره ورځ تازه شي او د هر ښار نرخ په خپله ورزیاتېدای شي. د افغانستان د ډېرو ښارونو صرافي نرخونه په عامه توګه پر انټرنېټ نه خپرېږي؛ د ملي حواله نرخونو لپاره پورته لوی جدول وګورئ.</p>
+      </section>
+
+      <!-- ======= HISTORY ======= -->
+      <section id="history">
+        <div class="sec-head">
+          <h2>د نرخونو تاریخچه — وروستۍ ورځې</h2>
+          <span class="sub">پرون او وړمه ورځ بازار څنګه و؟ هره شمېره له خپلې سرچینې سره</span>
+          <span class="lat">Rate History</span>
+        </div>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>نېټه</th><th>ډالر / افغانۍ</th><th>سره زر (اونس)</th><th>بټکوین</th><th>یادونه</th></tr></thead>
+            <tbody id="histBody"></tbody>
+          </table>
+        </div>
+        <p class="note">تاریخچه هره ورځ د نن ورځې له کره نرخونو سره تازه کېږي، تر څو د بازار لوری (پورته که ښکته) په خپلو سترګو وګورئ. کومه ورځ چې کره شمېره نه وي، هلته «—» لیکل شوی — اټکلي شمېره نه اچول کېږي.</p>
+      </section>
+
+      <!-- ======= CONVERTER ======= -->
+      <section id="converter">
+        <div class="sec-head">
+          <h2>د پیسو بدلونکی</h2>
+          <span class="sub">د نن ورځې په نرخونو حساب وکړئ</span>
+          <span class="lat">Currency Converter</span>
+        </div>
+        <div class="card">
+          <div class="conv">
+            <div>
+              <label for="amt">مقدار</label>
+              <input id="amt" type="number" inputmode="decimal" value="100" min="0" />
+            </div>
+            <div>
+              <label for="from">له (From)</label>
+              <select id="from">
+                <option value="USD" selected>ډالر (USD)</option>
+                <option value="AFN">افغانۍ (AFN)</option>
+                <option value="PKR">کلدارې (PKR)</option>
+                <option value="EUR">یورو (EUR)</option>
+                <option value="AED">درهم (AED)</option>
+                <option value="TOMAN">تومان (Toman)</option>
+              </select>
+            </div>
+            <div>
+              <label for="to">ته (To)</label>
+              <select id="to">
+                <option value="AFN" selected>افغانۍ (AFN)</option>
+                <option value="USD">ډالر (USD)</option>
+                <option value="PKR">کلدارې (PKR)</option>
+                <option value="EUR">یورو (EUR)</option>
+                <option value="AED">درهم (AED)</option>
+                <option value="TOMAN">تومان (Toman)</option>
+              </select>
+            </div>
+            <div>
+              <label>پایله</label>
+              <div class="out num" id="out">—</div>
+            </div>
+          </div>
+          <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+            <span style="font-weight:700;font-size:.9rem">چټک مقدار:</span>
+            <button type="button" class="chipbtn" data-amt="1000">۱ زر — <span class="num">1,000</span></button>
+            <button type="button" class="chipbtn" data-amt="100000">۱ لک — <span class="num">100,000</span></button>
+            <button type="button" class="chipbtn" data-amt="1000000">۱ میلیون — <span class="num">1,000,000</span></button>
+          </div>
+          <button type="button" id="swap" style="margin-top:12px;padding:6px 22px;border-radius:999px;border:1px solid var(--gold2);background:var(--goldsoft);color:var(--ink);font:inherit;font-weight:800;cursor:pointer">⇄ اسعار سره بدل کړئ</button>
+          <p class="note">اصلي جوړې: افغانۍ ⇄ ډالر، افغانۍ ⇄ کلدارې، ډالر ⇄ کلدارې. حساب په دې نرخونو کېږي: ډالر <span class="num">66.045</span> افغانۍ، ۱ ډالر = <span class="num">282.5</span> کلدارې، کلداره <span class="num">0.235</span> افغانۍ، یورو <span class="num">72.75</span>، درهم <span class="num">18.10</span> افغانۍ (۲۳ نومبر ۲۰۲۶). <b>تومان په میلیون حسابېږي:</b> ۱ میلیون تومان = <span class="num">239</span> افغانۍ (Afaaq، ۲۲ نومبر ۲۰۲۶ — تومان د نن ورځې په خپرونه کې نه و) — د تومان لپاره مقدار په زرونو، لکونو یا میلیونونو ولیکئ، پایله به هم په میلیون/لک درته وښودل شي، نه په کوچني اعشاري شمېره.</p>
+        </div>
+        <div class="adslot">Advertisement — د اعلاناتو ځای</div>
+      </section>
+
+      <!-- ======= CRYPTO MARKET (prices only) ======= -->
+      <section id="crypto">
+        <div class="sec-head">
+          <h2>د ډیجیټل کرنسیو بازار</h2>
+          <span class="sub">نرخونه هرې ۶۰ ثانیې پخپله تازه کېږي — د هرې ډیجیټل کرنسۍ بشپړ معلومات په جلا پاڼه «د ډیجیټل کرنسیو معلومات» کې دي</span>
+          <span class="lat">Digital Currency · Prices</span>
+        </div>
+
+        <div class="livestat">
+          <span class="when" id="liveWhen">سنیپ‌شاټ: ۲۳ نومبر ۲۰۲۶ · ۱۰:۳۹ — د کابل وخت (CoinGecko؛ TON: Coinbase)</span>
+        </div>
+        <div class="livegrid" id="liveGrid"></div>
+
+        <div class="card why" style="margin-bottom:14px">
+          <h3>نن بازار څنګه دی؟</h3>
+          <p>بټکوین نن <strong class="num">$61,654</strong> دی — په ۲۴ ساعتونو کې <strong class="num">+4.39%</strong> پورته (<strong>CoinGecko</strong>، ۲۳ نومبر ۲۰۲۶، ۱۰:۳۹ د کابل وخت). پورته کېدل په ټول بازار کې پراخ دی — ټولې ۲۱ ډیجیټل کرنسۍ نن شنه دي: ایتینا <strong class="num">+5.79%</strong>، نییر <strong class="num">+5.33%</strong>، ټونکوین <strong class="num">+4.91%</strong> او چین‌لینک <strong class="num">+4.69%</strong> مخکښ دي؛ سټېبل ډالرونه (USDT <strong class="num">+0.04%</strong>، USDC <strong class="num">+0.02%</strong>) د تل په څېر ثابت دي. د دې حرکت ځانګړی تایید شوی لامل لا په باوري سرچینه کې نه دی خپور شوی — چې کله خپور شي، دلته به یې له سرچینې سره راوړو. پورته کارتونه هرې ۶۰ ثانیې پخپله تازه کېږي — د هرې کرنسۍ کره اوسنی نرخ هماغه ځای وګورئ.</p>
+        </div>
+        <p class="note">پورته کارتونه هېڅکله تش نه وي: لومړی د <b>۲۳ نومبر ۲۰۲۶ (۱۰:۳۹، د کابل وخت)</b> بشپړ سنیپ‌شاټ ښودل کېږي، بیا نرخونه هرې <b>۶۰ ثانیې</b> پخپله له انټرنېټ څخه تازه کېږي — پاڼه بیا تازه کولو (refresh) ته اړتیا نشته. د وروستي تازه کېدو وخت پورته ښودل کېږي.</p>
+        <p class="src">د نرخونو اصلي سرچینه: <b>CoinGecko</b> — که هغه ونه شي، په ترتیب سره <b>Kraken</b> او بیا <b>Coinbase</b> هڅه کېږي. د هرې ډیجیټل کرنسۍ بشپړ معلومات په جلا پاڼه «د ډیجیټل کرنسیو معلومات» کې دي.</p>
+      </section>
+
+      <!-- ======= COIN PROFILES (separate from live prices) ======= -->
+      <section id="coin-info">
+        <div class="sec-head">
+          <h2>د ډیجیټل کرنسیو معلومات</h2>
+          <span class="sub">هره ډیجیټل کرنسي: جوړوونکی، موخه، تاریخ، عرضه او حکومتي تړاو</span>
+          <span class="lat">Digital Currency Information</span>
+        </div>
+        <div class="grid g2" id="profileGrid"></div>
+        <p class="note">یوه مهمه خبره: بټکوین، ایتیریم، سولانا، XRP او BNB <strong>د هیڅ حکومت یا مرکزي بانک لخوا نه دي جوړ شوي او نه ورسره تړاو لري</strong> — دا خپلواکې، غیرمتمرکزې ډیجیټل کرنسۍ دي. یوازې USDT (ټیټر) د یوې خصوصي کمپنۍ لخوا خپرېږي او د ډالر له زیرمو سره تړل شوی. د مرکزي بانکونو ډیجیټل اسعار (CBDC) بېل شی دی او په دې لېست کې نشته.</p>
+      </section>
+
+      <!-- ======= METALS & GEMS ======= -->
+      <section id="metals">
+        <div class="sec-head">
+          <h2>سره زر، سپین زر او قیمتي ډبرې</h2>
+          <span class="sub">نړیوال نرخونه او په افغانۍ یې ارزښت</span>
+          <span class="lat">Gold, Silver &amp; Gems</span>
+          <span class="tag upd"></span>
+        </div>
+        <div class="warn" style="margin:0 0 14px">
+          <strong>دوه ډوله نرخونه — مه یې ګډوئ:</strong> (۱) <b>د نړیوال سپاټ (Spot) څخه حساب شوي نرخونه</b> — له نړیوال اونس څخه په ډالر او افغانۍ بدل شوي، لاندې د قیراطونو جدول همدا دی. (۲) <b>د کابل د سرو زرو د اتحادیې / بازار نرخ</b> — هغه بیه چې د کابل زرګران یې هره ورځ ټاکي او کاریګري (جوړښت) پکې شامله وي؛ دا له سپاټ څخه توپیر لري. عربي او روسي سره زر د کابل د بازار ډولونه دي — د هغو لپاره لاندې جلا کارت وګورئ.
+        </div>
+        <div class="grid g3">
+          <div class="card">
+            <h3>سره زر — نړیوال سپاټ Gold (XAU)</h3>
+            <div class="bigprice num">$<span id="goldSpot">3,608</span> <span class="unit">/ اونس</span></div>
+            <p>نړیوال سپاټ — ۲۳ نومبر ۲۰۲۶ (forexinvestors: ≈ <span class="num">$3,608</span>) &nbsp;•&nbsp; خالص ګرام ≈ <strong class="num">$116.00</strong> ≈ <strong class="num">7,661</strong> افغانۍ ≈ <strong class="num">32,770</strong> کلدارې</p>
+          </div>
+          <div class="card">
+            <h3>سپین زر — Silver (XAG) د خالصوالي له مخې</h3>
+            <div class="bigprice num">$42.66 <span class="unit">/ اونس (999)</span></div>
+            <p>نړیوال سپاټ — ۲۳ نومبر ۲۰۲۶ (sarafi.af metals)</p>
+            <p><b>999 خالص سپین:</b> یو ګرام ≈ <strong class="num">$1.37</strong> ≈ <strong class="num">91</strong> افغانۍ · یو اونس ≈ <strong class="num">2,817</strong> افغانۍ · یو کیلوګرام ≈ <strong class="num">90,600</strong> افغانۍ</p>
+            <p><b>925 سټرلینګ (د ګاڼو سپین):</b> یو ګرام ≈ <strong class="num">$1.27</strong> ≈ <strong class="num">84</strong> افغانۍ · یو کیلوګرام ≈ <strong class="num">83,800</strong> افغانۍ</p>
+            <p>سپین زر په <b>ګرام او کیلوګرام</b> خرڅېږي — د خالصوالي (999 / 925) له مخې.</p>
+            <p>دا هم د سپاټ څخه حساب شوي نرخونه دي؛ د کابل په بازار کې د سپینو بیه له دې لږ توپیر کولای شي.</p>
+          </div>
+          <div class="card">
+            <h3>پلاټینم — Platinum (XPT)</h3>
+            <div class="bigprice num">$1,314.40 <span class="unit">/ اونس</span></div>
+            <p>نن: <span class="chg down num">▼ 2.44%−</span> (WSJ) &nbsp;•&nbsp; یو اونس ≈ <strong class="num">86,975</strong> افغانۍ ≈ <strong class="num">373,300</strong> کلدارې</p>
+            <p>په موټرو او صنعت کې کارېږي؛ بیه یې د صنعتي غوښتنې او د موټرو له بازار سره تړلې ده.</p>
+          </div>
+        </div>
+
+        <h3 style="margin:22px 0 6px;font-size:1.15rem;font-weight:800">سره زر د قیراط (درجې) له مخې — د نړیوال سپاټ څخه حساب شوي</h3>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>درجه (قیراط)</th><th>ګرام — افغانۍ</th><th>مثقال — افغانۍ</th><th>توله — افغانۍ</th><th>اونس — افغانۍ</th><th>ګرام — ډالر</th><th>ګرام — کلدارې</th></tr></thead>
+            <tbody id="goldBody"></tbody>
+          </table>
+        </div>
+        <p class="note">حساب: سپاټ <span class="num">$3,608</span>/اونس (۲۳ نومبر ۲۰۲۶) · ډالر = <span class="num">66.045</span> افغانۍ · ۱ ډالر = <span class="num">282.5</span> کلدارې · مثقال = <span class="num">4.6</span> ګرامه · توله = <span class="num">11.6638</span> ګرامه · اونس (ټرای) = <span class="num">31.1035</span> ګرامه. ۲۱ قیراط په افغانستان کې کله 880 او کله 875 پلورل کېږي — دلته 875 اخیستل شوی؛ د 880 بیه به لږ لوړه وي. سره زر په <b>ګرام، مثقال، توله او اونس</b> خرڅېږي — په هر حالت کې د ګرام نرخ هم شته.</p>
+
+        <h3 style="margin:22px 0 6px;font-size:1.15rem;font-weight:800">سپاټ او د کابل بازار — څنګ په څنګ</h3>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>درجه (قیراط)</th><th>سپاټ — ګرام (افغانۍ)</th><th>د کابل بازار — ګرام (افغانۍ)</th><th>سپاټ — توله (افغانۍ)</th><th>د کابل بازار — توله (افغانۍ)</th></tr></thead>
+            <tbody id="goldCompare"></tbody>
+          </table>
+        </div>
+        <p class="note">د کابل د بازار نرخ د <b>کابل د سرو زرو اتحادیې</b> نرخ دی (سرچینه: Afaaq، ۲۲ نومبر ۲۰۲۶، خپور شوی ۱۲:۵۲ د کابل وخت — نن د اتحادیې نوی راپور نه دی خپور شوی) — کاریګري پکې شامله وي، ځکه له سپاټ څخه لوړ دی. سپاټ د نړیوال اونس (<span class="num">$3,608</span>، ۲۳ نومبر ۲۰۲۶) څخه حساب شوی خام نرخ دی. د پیرودلو پر وخت وروستی نرخ له خپل زرګر څخه وپوښتئ.</p>
+
+        <div class="card" style="margin-top:14px">
+          <h3>د کابل بازار ډولونه — عربي او روسي سره زر</h3>
+          <p><b>عربي سره زر</b> (معمولاً ۲۱ قیراط ته نږدې): د سپاټ له حسابه یو ګرام ≈ <strong class="num">6,703</strong> افغانۍ راځي.</p>
+          <p><b>روسي سره زر</b> (معمولاً ۱۴ قیراط ته نږدې، کم خالص): د سپاټ له حسابه یو ګرام ≈ <strong class="num">4,482</strong> افغانۍ راځي.</p>
+          <p><b>پام:</b> پورته دواړه شمېرې د نړیوال سپاټ څخه <u>حساب شوې</u> دي، د کابل د اتحادیې رسمي نرخ <u>نه</u> دی. پژواک (Pajhwok) په خپل وروستي خپور شوي اونیز راپور (۱۱ اکتوبر ۲۰۲۵) کې د کابل بازار لپاره عربي سره زر <span class="num">6,850</span> او روسي <span class="num">5,450</span> افغانۍ/ګرام لیکلي وو — هغه وخت نړیوال سره زر تر اوسه لوړ وو. د نن ورځې د اتحادیې کره نرخ په عامه سرچینه کې نه دی خپور شوی؛ د پیرودلو مخکې یې له خپل زرګر څخه وپوښتئ.</p>
+        </div>
+        <div class="card" style="margin-top:14px">
+          <h3>د هرات سره زر — د ګرام نرخ (افغانۍ)</h3>
+          <p><b>۲۱ قیراط:</b> اخیستل <strong class="num">7,470</strong> / پلورل <strong class="num">7,520</strong> افغانۍ · <b>۱۸ قیراط:</b> اخیستل <strong class="num">6,210</strong> / پلورل <strong class="num">6,260</strong> افغانۍ</p>
+          <p class="src">سرچینه: Afaaq — ۲۱ نومبر ۲۰۲۶ (نن د هرات نوی راپور نه دی خپور شوی).</p>
+        </div>
+        <p class="src" style="margin-top:8px">د فلزاتو سرچینې: د سرو زرو نړیوال سپاټ — forexinvestors (۲۳ نومبر ۲۰۲۶)؛ سپین زر — sarafi.af metals (۲۳ نومبر ۲۰۲۶)؛ د کابل د اتحادیې نرخونه — Afaaq (۲۲ نومبر ۲۰۲۶)؛ د هرات نرخونه — Afaaq (۲۱ نومبر ۲۰۲۶)؛ پلاټینم — WSJ (۲۰ نومبر ۲۰۲۶). د کابل په بازار کې کاریګري او مالیه پر سپاټ نرخ سربېره وي.</p>
+
+        <div class="grid g2" style="margin-top:14px">
+          <div class="card">
+            <h3>قیمتي ډبرې — په قیراط (carat) نړیوال حواله نرخونه</h3>
+            <p><b>الماس (Diamond):</b> <span class="range num">$6,500 – $50,000+</span> په قیراط <span class="src">≈ <span class="num">430,000 – 3,308,500</span> افغانۍ · ≈ <span class="num">1,846,000 – 14,200,000</span> کلدارې</span></p>
+            <p><b>زمرد (Emerald):</b> <span class="range num">$3,000 – $20,000</span> په قیراط <span class="src">≈ <span class="num">198,500 – 1,323,400</span> افغانۍ · ≈ <span class="num">852,000 – 5,680,000</span> کلدارې</span> — <strong>د پنجشېر زمرد</strong> په نړۍ کې له مشهورو څخه دي.</p>
+            <p><b>یاقوت (Ruby):</b> <span class="range num">$2,500 – $18,000</span> په قیراط <span class="src">≈ <span class="num">165,400 – 1,191,100</span> افغانۍ · ≈ <span class="num">710,000 – 5,112,000</span> کلدارې</span> — د بدخشان او جګدلک (کابل) یاقوت پېژندل شوي دي.</p>
+            <p><b>نیلم (Sapphire):</b> <span class="range num">$1,800 – $15,000</span> په قیراط <span class="src">≈ <span class="num">119,100 – 992,600</span> افغانۍ · ≈ <span class="num">511,200 – 4,260,000</span> کلدارې</span></p>
+          </div>
+          <div class="card">
+            <h3>د افغانستان ډبرې ولې مهمې دي؟</h3>
+            <p>افغانستان د زمردو (پنجشېر)، یاقوتو، لاجوردو (بدخشان) او تورمالین له پلوه په نړۍ کې ځانګړی ځای لري. د ډبرې بیه د <strong>رنګ، صفایۍ، وزن (قیراط) او اصلي کان</strong> له مخې ټاکل کېږي — د هماغه ډبرې دوه ټوټې کېدای شي په بیه کې لسګونه چنده توپیر ولري.</p>
+            <p>له همدې امله د ډبرو لپاره «د ورځې نرخ» د سرو زرو په څېر نه وي؛ پورته لړۍ د نړیوال بازار حواله حدود دي، نه د کابل د کومې ځانګړې دوکان بیه.</p>
+            <p class="src">سرچینه: KnowYourGem د ډبرو د بازار حواله حدود (۲۰۲۶).</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======= FUEL ======= -->
+      <section id="fuel">
+        <div class="sec-head">
+          <h2>تېل — ډیزل او پټرول</h2>
+          <span class="sub">په افغانستان کې د یوه لیټر بیه</span>
+          <span class="lat">Fuel Prices</span>
+          <span class="tag upd"></span>
+        </div>
+        <div class="grid g2">
+          <div class="card">
+            <h3>پټرول — Petrol</h3>
+            <div class="bigprice num">78 <span class="unit">افغانۍ / لیټر</span></div>
+            <p>په ډالرو ≈ <strong class="num">$1.18</strong> · په کلدارو ≈ <strong class="num">334</strong> کلدارې / لیټر</p>
+            <p>د کابل وروستی خپور شوی راپور — ۲۱ نومبر ۲۰۲۶ (دا د نن ورځې نرخ نه دی؛ نوی راپور لا نه دی خپور شوی).</p>
+          </div>
+          <div class="card">
+            <h3>ډیزل — Diesel</h3>
+            <div class="bigprice num">86 <span class="unit">افغانۍ / لیټر</span></div>
+            <p>په ډالرو ≈ <strong class="num">$1.30</strong> · په کلدارو ≈ <strong class="num">368</strong> کلدارې / لیټر</p>
+            <p>د کابل وروستی خپور شوی راپور — ۲۱ نومبر ۲۰۲۶ (دا د نن ورځې نرخ نه دی؛ نوی راپور لا نه دی خپور شوی). د ترانسپورت او جنراتورونو له امله د ډیزلو بیه په ټولو توکو اغېز کوي.</p>
+          </div>
+        </div>
+        <p class="src" style="margin-top:8px">سرچینې: awamiitlah او OpenVan — د کابل د تېلو وروستی خپور شوی راپور (۲۱ نومبر ۲۰۲۶)؛ نوی Pajhwok راپور لا نه دی خپور شوی. مخکنی راپور (Pajhwok، ۷ نومبر ۲۰۲۶): پټرول <span class="num">85</span> او ډیزل <span class="num">83</span> افغانۍ/لیټر — په تاریخچه کې خوندي دی. بیې له یوه ښار څخه بل ښار او له یوه پمپ څخه بل پمپ ته لږ توپیر کولای شي.</p>
+      </section>
+
+      <!-- ======= OUTLOOK ======= -->
+      <section id="outlook">
+        <div class="sec-head">
+          <h2>شننه او اټکل — راتلونکي ته کتنه</h2>
+          <span class="sub">دا شننه ده، مالي مشوره نه ده</span>
+          <span class="lat">Market Outlook</span>
+        </div>
+        <div class="grid g2 outlook">
+          <div class="card">
+            <h3>ډالر / افغانۍ (USD/AFN)</h3>
+            <p class="dir">اټکل: په نږدې وخت کې <span style="color:var(--gold)">ثبات ته نږدې، لږ بدلون</span></p>
+            <div class="meter"><i style="width:55%"></i></div>
+            <p><strong>لاملونه:</strong> افغانۍ په وروستیو کلونو کې د سیمې له پیاوړو اسعارو څخه وه — د افغانستان بانک د ډالرو لیلامونه، هېواد ته د بشري مرستو ډالر راتګ او د وارداتو محدودیت یې ملاتړ کوي. بل لور ته، د بهرنیو مرستو کموالی او کنګل شوې زیرمې د اوږدې مودې خطرونه دي. که مرستې نورې هم کمې شي، ډالر ورو ورو لوړېدای شي؛ که لیلامونه او راتلونکي ډالر همداسې دوام وکړي، نرخ په همدې شاوخوا کې پاتې کېږي.</p>
+          </div>
+          <div class="card">
+            <h3>کلدارې / افغانۍ (PKR/AFN)</h3>
+            <p class="dir">اټکل: کلدارې د افغانۍ پر وړاندې <span style="color:var(--red)">کمزورې پاتې کېدل</span> ممکن دي</p>
+            <div class="meter"><i style="width:40%"></i></div>
+            <p><strong>لاملونه:</strong> پاکستان له اوږدې مودې راهیسې له انفلاسیون او د بهرنیو زیرمو له فشار سره مخ دی، چې کلداره یې ورو ورو کمزورې کړې ده. نن ۱۰۰۰ کلدارې = <span class="num">235</span> افغانۍ دي (سرای شهزاده، ۲۳ نومبر ۲۰۲۶). د پولې سوداګري او د پاکستان سیاسي-اقتصادي حالت پر دې نرخ مستقیم اغېز لري.</p>
+          </div>
+          <div class="card">
+            <h3>ډالر / کلدارې (USD/PKR)</h3>
+            <p class="dir">نن: ۱ ډالر = <span class="num">282.5</span> کلدارې (سرای شهزاده) — اټکل: کلدارې نوره هم <span style="color:var(--red)">ورو کمزورې کېدل</span> ممکن دي</p>
+            <div class="meter"><i style="width:38%"></i></div>
+            <p><strong>لاملونه:</strong> پاکستان د انفلاسیون، د بهرنیو زیرمو د کمښت او د انرژۍ د لوړو بیو له فشار سره مخ دی، په داسې حال کې چې ډالر په نړیواله کچه پیاوړی پاتې دی. له همدې امله کلداره هم د ډالر او هم د افغانۍ پر وړاندې ورو ورو ارزښت له لاسه ورکوي. د پاکستان د مرکزي بانک پرېکړې او د IMF پروګرام پرمختګ به راتلونکی لوری وټاکي.</p>
+          </div>
+          <div class="card">
+            <h3>بټکوین (BTC)</h3>
+            <p class="dir">اټکل: لنډمهاله <span style="color:var(--red)">فشار او ښکته تمایل</span>، اوږدمهاله نامعلوم</p>
+            <div class="meter"><i style="width:35%"></i></div>
+            <p><strong>لاملونه:</strong> بټکوین په یوه میاشت کې شاوخوا <span class="num">24.7%−</span> ښکته شوی او له ټولو مهمو تخنیکي کرښو (EMA 20/50/200) لاندې دی؛ RSI یې شاوخوا <span class="num">20</span> دی، یعنې ډېر پلورل شوی (oversold) — دا کله کله د لنډې رغېدنې نښه هم وي، خو تر هغه چې د ټکنالوژۍ ونډو پلور او د Fed وېرې دوام وکړي، خطر پاتې دی. ملاتړ: <span class="num">$58,700</span> شاوخوا؛ مقاومت: <span class="num">$63,500</span>.</p>
+            <p class="src">تخنیکي شننه: Big 5 Capital اونیز راپور (د نومبر ۲۰مه، ۲۰۲۶).</p>
+          </div>
+        </div>
+        <div class="warn">
+          <strong>پام:</strong> اټکلونه او شننې د بازار د پوهې لپاره دي، د ګټې ژمنه نه ده. ډیجیټل کرنسۍ او اسعار دواړه په چټکۍ بدلېږي — د لویې راکړې ورکړې مخکې نرخ له څو سرچینو او خپل صراف څخه وګورئ او یوازې هغه پیسې په خطر کې واچوئ چې له لاسه ورکول یې زغملی شئ.
+        </div>
+      </section>
+
+      <!-- ======= WEIGHTS & MEASURES ======= -->
+      <section id="weights">
+        <div class="sec-head">
+          <h2>پیمانه او وزنونه — هره پیمانه څومره ده؟</h2>
+          <span class="sub">سره زر، سپین زر او ډبرې په کومو پیمانو خرڅېږي او هره پیمانه څومره وزن لري</span>
+          <span class="lat">Weights &amp; Measures</span>
+        </div>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>پیمانه</th><th>وزن</th><th>د څه لپاره کارېږي</th></tr></thead>
+            <tbody>
+              <tr><td><b>ټرای اونس (Troy Ounce)</b></td><td class="num lbl" data-l="وزن">31.1035 ګرامه</td><td>د نړیوال سپاټ نرخ پیمانه — سره زر، سپین زر او پلاټینم په ټوله نړۍ کې په همدې اونس حسابېږي.</td></tr>
+              <tr><td><b>اونس — عادي (Avoirdupois Ounce)</b></td><td class="num lbl" data-l="وزن">28.3495 ګرامه</td><td>د عمومي توکو وزن؛ د سرو زرو له ټرای اونس سره یې مه ګډوئ — دواړه بېل دي.</td></tr>
+              <tr><td><b>توله (Tola)</b></td><td class="num lbl" data-l="وزن">11.6638 ګرامه</td><td>په افغانستان، هند او پاکستان کې د سرو زرو ډېره مشهوره پیمانه.</td></tr>
+              <tr><td><b>مثقال (Misqal)</b></td><td class="num lbl" data-l="وزن">4.6 ګرامه</td><td>په سیمه‌ییزو بازارونو کې د سرو زرو پیمانه.</td></tr>
+              <tr><td><b>ګرام (Gram)</b></td><td class="num lbl" data-l="وزن">بنسټیزه پیمانه</td><td>سره زر او سپین زر تل په ګرام هم حسابېږي — په دې پاڼه کې د هر شي د ګرام نرخ شته.</td></tr>
+              <tr><td><b>کیلوګرام (Kilogram)</b></td><td class="num lbl" data-l="وزن">1,000 ګرامه</td><td>سپین زر او لوی مقدار فلزات په کیلوګرام خرڅېږي.</td></tr>
+              <tr><td><b>قیراط (Carat)</b></td><td class="num lbl" data-l="وزن">0.2 ګرامه</td><td>یوازې د قیمتي ډبرو (الماس، زمرد، یاقوت، نیلم) د وزن لپاره. یادونه: د سرو زرو «قیراط» (درجه/خالصوالی) له دې څخه بېل شی دی.</td></tr>
+              <tr><td><b>لیټر (Litre)</b></td><td class="num lbl" data-l="وزن">حجم دی، وزن نه</td><td>پټرول او ډیزل په لیټر خرڅېږي.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">لنډیز: سره زر په <b>ګرام، مثقال، توله او ټرای اونس</b> خرڅېږي (د درجې/قیراط له مخې)؛ سپین زر په <b>ګرام او کیلوګرام</b> (د خالصوالي 999 / 925 له مخې)؛ ډبرې په <b>قیراط</b>؛ تېل په <b>لیټر</b>. د سپاټ او د کابل د بازار نرخونه د هماغې پیمانې لپاره د «سره زر او پیمانه» په پاڼه کې څنګ په څنګ شته.</p>
+      </section>
+
+      <!-- ======= WHAT MOVES A CURRENCY ======= -->
+      <section id="currency-value">
+        <div class="sec-head">
+          <h2>د یو هېواد کرنسي ولې قوي یا کمزورې کېږي؟</h2>
+          <span class="sub">هغه لاملونه چې د هرې کرنسۍ ارزښت ورسره تړلی دی</span>
+          <span class="lat">What a Currency's Value Depends On</span>
+        </div>
+        <div class="grid g2">
+          <div class="card">
+            <h3>د مرکزي بانک زیرمې (Reserves)</h3>
+            <p>څومره چې یو هېواد ډېرې بهرنۍ زیرمې (ډالر، سره زر) ولري، هومره یې کرنسي پیاوړې وي — ځکه بازار باور لري چې بانک یې ملاتړ کولی شي. د افغانستان زیرمې له ۲۰۲۱ راهیسې په بهر کې کنګل دي، چې پر افغانۍ فشار اچوي.</p>
+          </div>
+          <div class="card">
+            <h3>عرضه او تقاضا (Supply &amp; Demand)</h3>
+            <p>که ډېر خلک یوه کرنسي غواړي (تقاضا لوړه وي) او کمه په بازار کې وي (عرضه کمه وي)، ارزښت یې لوړېږي. د افغانۍ د نوټونو محدود چاپ هم د هغې د ثبات یو لامل بلل کېږي.</p>
+          </div>
+          <div class="card">
+            <h3>سوداګري — صادرات او واردات (Trade)</h3>
+            <p>کوم هېواد چې ډېر صادرات لري، بهرنیان یې کرنسي اخلي او ارزښت یې لوړېږي. افغانستان تر ډېره واردوونکی هېواد دی، نو د ډالر تقاضا پکې تل لوړه وي.</p>
+          </div>
+          <div class="card">
+            <h3>بهرنۍ مرستې او حوالې (Aid &amp; Remittances)</h3>
+            <p>هېواد ته د راتلونکو ډالرو اندازه مستقیم اغېز لري: بشري مرستې او د بهر مېشتو افغانانو حوالې چې ډالر راوړي، افغانۍ پیاوړې کوي؛ که دا کمې شي، ډالر لوړېږي.</p>
+          </div>
+          <div class="card">
+            <h3>د افغانستان بانک ډالر لیلامونه (DAB Auctions)</h3>
+            <p>کله چې ډالر لوړېږي، د افغانستان بانک بازار ته ډالر لیلاموي (خرڅوي) تر څو افغانۍ ثابت وساتي. د لیلامونو اندازه او پرله‌پسې‌والی د نرخ پر لوري مستقیم اغېز لري.</p>
+          </div>
+          <div class="card">
+            <h3>ثبات، باور او ګاونډي اسعار</h3>
+            <p>سیاسي ثبات او پر اقتصاد باور کرنسي پیاوړې کوي؛ ناارامي او انفلاسیون یې کمزورې کوي. د ګاونډیو اسعارو (لکه کلدارې او تومان) بدلون هم پر افغانۍ اغېز لري، ځکه سوداګري ورسره تړلې ده.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======= SOURCES ======= -->
+      <section id="sources">
+        <div class="sec-head">
+          <h2>سرچینې — نرخونه له کومه راځي</h2>
+          <span class="sub">هغه سرچینې چې نرخونه خپروي او پر وخت خبر ورکوي — حقایق په خپلو ټکو، سرچینه تل نومول شوې</span>
+          <span class="lat">Sources</span>
+        </div>
+        <div class="grid g2">
+          <div class="card">
+            <h3>صرافي — اصلي سرچینې</h3>
+            <p><b><a href="https://sarafi.af">sarafi.af</a></b> — اصلي سرچینه: د سرای شهزاده او د افغانستان بانک نرخونه، د اخیستو/پلورلو او د تازه کېدو وخت سره.</p>
+            <p><b>Sarafiy</b> (ایپ او وېب) — د ښارونو د بازارونو نرخونه: کفایت بازار (مزار)، غلام دستگیر بازار (جلال‌اباد)، غزني، د کندهار صرافي بازار.</p>
+            <p><b>Asaar.af</b> — د افغان بازار لپاره اسعار، سره زر، تېل او ډیجیټل کرنسۍ.</p>
+            <p><b>Da Afghanistan Bank</b> — د ډالر رسمي حواله نرخ، د پرتلې لپاره.</p>
+          </div>
+          <div class="card">
+            <h3>ټولنیزې رسنۍ — ورځني نرخونه</h3>
+            <p><b>سرای شهزاده</b> (رسمي فیسبوک پاڼه) — هره ورځ بشپړ نرخونه، د کندهار، هرات، مزار او غزني ډالر نرخونه هم پکې وي.</p>
+            <p><b>نرخ اسعار در سرای شهزاده</b> (فیسبوک، ~۶۲ زره تعقیبوونکي) — ورځني نرخونه.</p>
+            <p><b>شبکه صرافی و خدمات پولی برکت — Barekat Exchange</b> — د بازار د تړل کېدو نرخونه؛ ټیلیګرام: <span class="en">@BarekatExchange</span> او واټساپ چینل هم لري.</p>
+            <p><b>Ashna Exchange</b> — د هرات او سرای شهزاده جدولونه. <b>نرخ اسعار دقیق سرای شهزاده</b> — د تومان نرخونه په میلیون حساب.</p>
+          </div>
+          <div class="card">
+            <h3>خبرونه — پر وخت معلومات</h3>
+            <p><b>Pajhwok Afghan News</b> — د کابل د سرو زرو او تېلو اونیز بازار راپورونه.</p>
+            <p><b>Afaaq</b> — د کابل د سرو زرو د اتحادیې ورځني نرخونه.</p>
+            <p><b>TOLOnews</b> او <b>Ariana News</b> — د بازار او اقتصاد خبرونه، چې د نرخونو پر لوري اغېز لري.</p>
+          </div>
+          <div class="card">
+            <h3>ډیجیټل کرنسي او نړیوال بازار</h3>
+            <p><b>CoinGecko</b> — په دې پاڼه کې د ډیجیټل کرنسیو د نرخونو اصلي سرچینه؛ <b>Kraken</b> او <b>Coinbase</b> یې بدیلونه دي.</p>
+            <p><b>CoinGecko</b> او <b>CoinMarketCap</b> — د نرخونو کراس‌چېک او د بازار ارزښت.</p>
+            <p><b>CoinDesk</b> — د ډیجیټل کرنسیو د پورته/ښکته کېدو د لاملونو خبرونه؛ د هرې کرنسۍ رسمي وېبپاڼه او سپین پاڼه (whitepaper) د جوړوونکي او موخې لپاره.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======= ABOUT / CREATOR / CONTACT / ADS ======= -->
+      <section id="about">
+        <div class="sec-head">
+          <h2>زموږ په اړه</h2>
+          <span class="sub">د وېبپاڼې، جوړوونکي او اړیکې په اړه</span>
+          <span class="lat">About &amp; Contact</span>
+        </div>
+        <div class="grid g2">
+          <div class="card">
+            <h3>د وېبپاڼې په اړه</h3>
+            <p>«د افغانستان د بازار نرخونه» د هېواد د تاجرانو، صرافانو او عامو خلکو لپاره جوړه شوې ده: د صرافي نرخونه له نومول شویو سرچینو سره، د ډیجیټل کرنسیو نرخونه، د سرو زرو او سپینو زرو نرخونه په ټولو پیمانو، او د تېلو بیې — ټول په پښتو او په یوه ځای کې. کوم نرخ چې کره سرچینه ونه لري، دلته نه لیکل کېږي.</p>
+          </div>
+          <div class="card">
+            <h3>د جوړوونکي په اړه</h3>
+            <p>دا وېبپاڼه <strong>عبدالرحیم شینواري</strong> جوړه کړې او چلوي. موخه یې دا ده چې د افغانستان د بازار کره معلومات هر افغان ته په خپله ژبه، وړیا او پر وخت ورسېږي.</p>
+          </div>
+          <div class="card">
+            <h3>اړیکه (Contact)</h3>
+            <p>برېښنالیک: <a href="mailto:abdurrahimafghan62@gmail.com"><span class="en">abdurrahimafghan62@gmail.com</span></a></p>
+            <p>که تاسو د کوم ښار صراف یاست او غواړئ د خپل بازار نرخونه هره ورځ دلته خپاره شي، یا مو کوم نرخ غلط ولید، په همدې برېښنالیک راسره اړیکه ونیسئ.</p>
+          </div>
+          <div class="card">
+            <h3>اعلانات (Advertisement)</h3>
+            <p>دا پاڼه د اعلاناتو لپاره تیاره ده — د اعلان ځایونه په پاڼو کې ځای پر ځای شوي دي. که غواړئ خپل کاروبار دلته اعلان کړئ، په پورته برېښنالیک اړیکه ونیسئ.</p>
+          </div>
+        </div>
+        <div class="adslot">Advertisement — د اعلاناتو ځای</div>
+        <div class="adslot">Advertisement — د اعلاناتو ځای</div>
+      </section>
+
+      <footer>
+        <h3>سرچینې او د معلوماتو په اړه</h3>
+        <p>د دې پاڼې شمېرې د ۲۰۲۶ کال د نومبر ۲۳مې (دوشنبه) تر سهاره پورې له دې سرچینو راټولې شوې دي: د سرای شهزاده رسمي فیسبوک پاڼه «نرخ اسعار سرای شهزاده» (د نن ورځې صرافي نرخونه) او <b>sarafi.af</b> (د ۲۲ نومبر د ماسپښین نرخونه)، <b>Da Afghanistan Bank</b> (رسمي نرخونه، ۲۳ نومبر)، <b>CoinGecko</b> (ډیجیټل کرنسي؛ TON له Coinbase څخه)، <b>AlanChand</b> (تومان/هرات)، <b>Afaaq</b> (د سرو زرو د اتحادیې نرخونه — ۲۲ نومبر، او د هرات نرخونه)، <b>forexinvestors</b> (د سرو زرو نړیوال سپاټ)، <b>sarafi.af metals</b> (سپین زر)، <b>awamiitlah / OpenVan</b> (تېل — ۲۱ نومبر)، <b>Wall Street Journal</b> (پلاټینم)، <b>KnowYourGem</b> (د ډبرو حواله حدود). هره شمېره په خپله برخه کې له خپلې نېټې او سرچینې سره لیکل شوې ده.</p>
+        <p>دا پاڼه یو معلوماتي خدمت دی؛ صرافي نرخونه د ښار، صراف او ساعت له مخې بدلېږي او وروستی سم نرخ ستاسو د خپل صراف نرخ دی. ډیجیټل کرنسي په افغانستان کې د افغانستان بانک له خوا محدود شوې ده — د قانوني اړخ په اړه له باوري سرچینې ځان خبر کړئ.</p>
+      </footer>
+    </div>
+
+    <script>
+      // ---------- Snapshot data: 23 Nov 2026, ~10:39 Kabul ----------
+      var TICKER = [
+        {n:"ډالر / افغانۍ USD/AFN", v:"66.045", c:null},
+        {n:"سرای شهزاده ډالر (پلورل)", v:"66.045", c:null},
+        {n:"یورو EUR/AFN", v:"72.75", c:null},
+        {n:"۱۰۰۰ کلدارې PKR", v:"235 ؋", c:null},
+        {n:"بټکوین BTC", v:"$61,654", c:"+4.39%", d:"up"},
+        {n:"ایتیریم ETH", v:"$1,728.74", c:"+4.15%", d:"up"},
+        {n:"سولانا SOL", v:"$71.92", c:"+4.13%", d:"up"},
+        {n:"سره زر Gold", v:"$3,608", c:null},
+        {n:"سپین زر Silver", v:"$42.66", c:null},
+        {n:"پټرول", v:"78 ؋/L", c:null},
+        {n:"ډیزل", v:"86 ؋/L", c:null}
+      ];
+      var tickHtml = TICKER.map(function(t){
+        var chg = t.c ? ' <span class="'+t.d+' num">'+(t.d==="up"?"▲":"▼")+" "+t.c+"</span>" : "";
+        return '<span class="tk"><span>'+t.n+'</span><b class="num">'+t.v+'</b>'+chg+'</span>';
+      }).join("");
+      document.getElementById("ticker").innerHTML = tickHtml + tickHtml; // duplicate for loop
+
+      // ---------- Cities: one table per market, each rate carries source + timestamp ----------
+      // To update a city, edit only its entry: add rows {cur, buy, sell, src, time}
+      // or {cur, mid, src, time} for a single market price. Empty rates = honest "awaiting" note.
+      var CITIES = [
+        {name:"کابل — سرای شهزاده", en:"Kabul · Sarai Shahzada Money Market", tag:"د هېواد بنچمارک بازار",
+         rates:[
+           {cur:"ډالر (USD)", buy:"66.43", sell:"66.045", src:"د سرای شهزاده رسمي فیسبوک پاڼه — نرخ اسعار سرای شهزاده", time:"۲۳ نومبر ۲۰۲۶ · ۰۶:۳۵"},
+           {cur:"یورو (EUR)", buy:"72.65", sell:"72.75", src:"د سرای شهزاده رسمي فیسبوک پاڼه — نرخ اسعار سرای شهزاده", time:"۲۳ نومبر ۲۰۲۶ · ۰۶:۳۵"},
+           {cur:"پونډ (GBP)", buy:"86.25", sell:"86.40", src:"د سرای شهزاده رسمي فیسبوک پاڼه — نرخ اسعار سرای شهزاده", time:"۲۳ نومبر ۲۰۲۶ · ۰۶:۳۵"},
+           {cur:"کلدارې (PKR) — په ۱۰۰۰", buy:"235", sell:"235", src:"د سرای شهزاده رسمي فیسبوک پاڼه — نرخ اسعار سرای شهزاده", time:"۲۳ نومبر ۲۰۲۶ · ۰۶:۳۵"},
+           {cur:"تومان (IRR) — په ۱ میلیون تومان", mid:"≈ 239", src:"Afaaq — تومان د نن ورځې (۲۳ نومبر) په سرای شهزاده خپرونه کې نه و", time:"۲۲ نومبر ۲۰۲۶"},
+           {cur:"ترکي لیره (TRY) — په ۱۰۰۰ = 1300 / 1320", buy:"1.30", sell:"1.32", src:"د سرای شهزاده رسمي فیسبوک پاڼه — نرخ اسعار سرای شهزاده", time:"۲۳ نومبر ۲۰۲۶ · ۰۶:۳۵"},
+           {cur:"ډالر / کلدارې (USD/PKR)", buy:"282.40", sell:"282.50", src:"د سرای شهزاده رسمي فیسبوک پاڼه — نرخ اسعار سرای شهزاده", time:"۲۳ نومبر ۲۰۲۶ · ۰۶:۳۵"},
+           {cur:"یورو / ډالر (EUR/USD) — په ۱۰۰", buy:"109.40", sell:"109.50", src:"د سرای شهزاده رسمي فیسبوک پاڼه — نرخ اسعار سرای شهزاده", time:"۲۳ نومبر ۲۰۲۶ · ۰۶:۳۵"},
+           {cur:"سعودي ریال (SAR)", buy:"17.60", sell:"17.70", src:"د سرای شهزاده رسمي فیسبوک پاڼه — نرخ اسعار سرای شهزاده", time:"۲۳ نومبر ۲۰۲۶ · ۰۶:۳۵"},
+           {cur:"درهم (AED)", buy:"18.00", sell:"18.10", src:"د سرای شهزاده رسمي فیسبوک پاڼه — نرخ اسعار سرای شهزاده", time:"۲۳ نومبر ۲۰۲۶ · ۰۶:۳۵"},
+           {cur:"سعودي ریال (SAR) — sarafi.af", mid:"17.71", src:"sarafi.af — سرای شهزاده (نن یې نوی نېټه‌لرونکی نرخ نه دی تایید شوی)", time:"۲۲ نومبر ۲۰۲۶ · ماسپښین"},
+           {cur:"درهم (AED) — sarafi.af", mid:"18.09", src:"sarafi.af — سرای شهزاده (نن یې نوی نېټه‌لرونکی نرخ نه دی تایید شوی)", time:"۲۲ نومبر ۲۰۲۶ · ماسپښین"},
+           {cur:"ډالر (USD) — رسمي نغد نرخ (DAB)", buy:"66.3400", sell:"66.5400", src:"د افغانستان بانک (DAB) — dab.gov.af", time:"۲۳ نومبر ۲۰۲۶ · وروستی تازه کېدل"},
+           {cur:"ډالر (USD) — رسمي حواله نرخ (DAB)", buy:"66.3900", sell:"66.4900", src:"د افغانستان بانک (DAB) — dab.gov.af", time:"۲۳ نومبر ۲۰۲۶ · وروستی تازه کېدل"},
+           {cur:"یورو (EUR) — رسمي نرخ (DAB)", buy:"72.4425", sell:"73.0425", src:"د افغانستان بانک (DAB) — dab.gov.af", time:"۲۳ نومبر ۲۰۲۶ · وروستی تازه کېدل"},
+           {cur:"پونډ (GBP) — رسمي نرخ (DAB)", buy:"85.2950", sell:"86.0950", src:"د افغانستان بانک (DAB) — dab.gov.af", time:"۲۳ نومبر ۲۰۲۶ · وروستی تازه کېدل"},
+           {cur:"سویس فرانک (CHF) — رسمي نرخ (DAB)", buy:"77.9245", sell:"78.4245", src:"د افغانستان بانک (DAB) — dab.gov.af", time:"۲۳ نومبر ۲۰۲۶ · وروستی تازه کېدل"},
+           {cur:"هندي روپۍ (INR) — رسمي نرخ (DAB)", buy:"0.7320", sell:"0.7420", src:"د افغانستان بانک (DAB) — dab.gov.af", time:"۲۳ نومبر ۲۰۲۶ · وروستی تازه کېدل"},
+           {cur:"کلدارې (PKR) — رسمي نرخ (DAB)، په ۱ کلداره", buy:"0.2311", sell:"0.2391", src:"د افغانستان بانک (DAB) — dab.gov.af", time:"۲۳ نومبر ۲۰۲۶ · وروستی تازه کېدل"},
+           {cur:"چینایي یوان (CNY) — رسمي نرخ (DAB)", buy:"9.9600", sell:"10.3600", src:"د افغانستان بانک (DAB) — dab.gov.af", time:"۲۳ نومبر ۲۰۲۶ · وروستی تازه کېدل"},
+           {cur:"درهم (AED) — رسمي نرخ (DAB)", buy:"17.7319", sell:"17.8319", src:"د افغانستان بانک (DAB) — dab.gov.af", time:"۲۳ نومبر ۲۰۲۶ · وروستی تازه کېدل"},
+           {cur:"سعودي ریال (SAR) — رسمي نرخ (DAB)", buy:"17.2213", sell:"17.3213", src:"د افغانستان بانک (DAB) — dab.gov.af", time:"۲۳ نومبر ۲۰۲۶ · وروستی تازه کېدل"}
+         ],
+         note:"د نن ورځې (۲۳ نومبر ۲۰۲۶) نرخونه د سرای شهزاده له رسمي فیسبوک پاڼې «نرخ اسعار سرای شهزاده» څخه دي (خپرونه: ۰۶:۳۵، د کابل وخت — «نرخ اسعار روز تاریخ قوس 2/1405»). د ډالر د پلورلو شمېره (66.045) لکه څنګه چې خپره شوې ده — له اخیستلو (66.43) ټیټه چاپ شوې. تومان په نننۍ خپرونه کې نه و — وروستی خپور شوی نرخ یې Afaaq دی (۲۲ نومبر ۲۰۲۶، ≈ 239 افغانۍ په ۱ میلیون تومان). د sarafi.af کرښې د ۲۲ نومبر ۲۰۲۶ د ماسپښین دي — نن یې نوی نېټه‌لرونکی نرخ نه دی تایید شوی. د افغانستان بانک (DAB) رسمي نرخونه (dab.gov.af، وروستی تازه کېدل ۲۳ نومبر ۲۰۲۶) په جلا کرښو کې دي؛ د DAB چاپ شوې د تومان شمېرې (0.0007 / 0.0001) دلته نه دي اخیستل شوي، ځکه خپرې شوې بڼه یې سمه نه ښکاري. تومان په سرای شهزاده کې په درې ډوله چلېږي — نغد، چیک او بانکي حواله — او هر یو خپل نرخ لري؛ نرخ یې په میلیون تومان حسابېږي."},
+        {name:"کابل — نور بازارونه", en:"Kabul · Other Markets", tag:"ښار نو، کوته سنګي، لېسه مریم…", rates:[],
+         note:"د کابل د نورو بازارونو نرخونه معمولاً د سرای شهزاده له نرخ سره نږدې وي، خو د هر بازار کره ورځنی نرخ جلا راټولېږي."},
+        {name:"هرات", en:"Herat", tag:"د تومان ښار",
+         rates:[
+           {cur:"ډالر (USD) — په تومان، د هرات بازار", mid:"≈ 273,200 تومان", src:"AlanChand — د هرات بازار (د تهران آزاد بازار ته نږدې)", time:"۲۰ نومبر ۲۰۲۶"}
+         ],
+         note:"په هرات کې تومان د ډالر تر څنګ اصلي اسعار دی. د افغانیو پر وړاندې د هرات د اخیستو/پلورلو کره نرخ لا نه دی ترلاسه شوی."},
+        {name:"کندهار", en:"Kandahar", tag:"د کندهار صرافي بازار — د کلدارو ښار", rates:[], note:"په کندهار کې کلدارې او افغانۍ دواړه چلېږي. د سرای شهزاده ورځنۍ فیسبوک خپرونې د کندهار ډالر نرخ هم خپروي — وروستی کره، نېټه‌لرونکی نرخ به د ترلاسه کېدو سره سم دلته راشي."},
+        {name:"جلال‌اباد", en:"Jalalabad", tag:"د غلام دستگیر بازار — د کلدارو ښار", rates:[], note:"د جلال‌اباد اصلي صرافي بازار د غلام دستگیر بازار دی؛ د تورخم سوداګرۍ له امله دلته د کلدارو چلند تر ټولو ډېر دی. کره ورځنی نرخ جلا راټولېږي."},
+        {name:"مزار شریف", en:"Mazar-e-Sharif", tag:"د کفایت بازار — شمالي سوداګري", rates:[], note:"د مزار اصلي صرافي بازار د کفایت بازار دی — د منځنۍ اسیا د سوداګرۍ دروازه. د سرای شهزاده ورځنۍ خپرونې د مزار ډالر نرخ هم لري؛ وروستی کره نرخ به دلته راشي."},
+        {name:"غزني", en:"Ghazni", tag:"د غزني صرافي بازار", rates:[], note:"د سرای شهزاده ورځنۍ خپرونې د غزني ډالر نرخ هم خپروي؛ وروستی کره نرخ به دلته راشي."},
+        {name:"کندوز", en:"Kunduz", tag:"شمال ختیځ", rates:[], note:"د تاجکستان پولې ته نږدې سوداګریز ښار؛ کره ورځنی نرخ جلا راټولېږي."}
+      ];
+      var AWAITING = "د دې ښار د نن ورځې کره صرافي نرخ لا نه دی ترلاسه شوی — نرخونه هره ورځ تازه کېږي او د ترلاسه کېدو سره سم به دلته خپاره شي. هېڅ شمېره د اټکل له مخې نه لیکل کېږي.";
+      document.getElementById("cityTables").innerHTML = CITIES.map(function(c){
+        var head = '<h3 style="margin:22px 0 4px;font-size:1.15rem;font-weight:800">'+c.name+' <span class="src en">'+c.en+'</span></h3><span class="tag">'+c.tag+'</span>';
+        if(!c.rates.length){
+          return head + '<div class="card" style="margin-top:8px"><p style="margin:0"><strong>'+AWAITING+'</strong></p><p>'+c.note+'</p></div>';
+        }
+        var rows = c.rates.map(function(r){
+          var buySell = r.mid
+            ? '<td class="lbl" data-l="د بازار نرخ" colspan="2"><b class="num">'+r.mid+'</b> <span class="src">(د بازار نرخ)</span></td>'
+            : '<td class="rate num lbl" data-l="اخیستل">'+r.buy+'</td><td class="rate num lbl" data-l="پلورل">'+r.sell+'</td>';
+          return '<tr><td><b>'+r.cur+'</b></td>'+buySell+'<td class="lbl" data-l="سرچینه">'+r.src+'</td><td class="lbl" data-l="وخت">'+r.time+'</td></tr>';
+        }).join("");
+        return head + '<div class="tablewrap" style="margin-top:8px"><table><thead><tr><th>اسعار</th><th>اخیستل (Buy)</th><th>پلورل (Sell)</th><th>سرچینه</th><th>وخت</th></tr></thead><tbody>'+rows+'</tbody></table></div><p class="note">'+c.note+'</p>';
+      }).join("");
+
+      /* ================================================================
+         DAILY MARKET DATA — د ورځني تازه کېدو لپاره یوازې همدا بلاک بدلوئ.
+         هره ورځ: asOf، د ښارونو نرخونه (CITIES)، د سرو زرو سپاټ (GOLD) او
+         تاریخچه (HISTORY) له اصلي سرچینو تازه کړئ — ډیزاین ته لاس مه وهئ.
+         ================================================================ */
+      var AS_OF = "وروستی تازه کېدل: دوشنبه، ۲۳ نومبر ۲۰۲۶ · د کابل په وخت ۱۰:۳۹";
+      var GOLD = { spotUSD: 3608, usdAfn: 66.045, usdPkr: 282.5 }; // world spot, 23 Nov 2026 (forexinvestors ~$3,608); AFN/PKR at Sarai Shahzada sell, 23 Nov 2026
+      var KARATS = [
+        {n:"۲۴ قیراط (999) — خالص", f:1.000},
+        {n:"۲۲ قیراط (916)", f:0.916},
+        {n:"۲۱ قیراط (875)", f:0.875},
+        {n:"۱۸ قیراط (750)", f:0.750},
+        {n:"۱۴ قیراط (585)", f:0.585}
+      ];
+      var HISTORY = [
+        {d:"۲۳ نومبر ۲۰۲۶ (نن)", usd:"اخیستل 66.43 / پلورل 66.045 (د سرای شهزاده فیسبوک پاڼه، ۰۶:۳۵) · DAB نغد: 66.3400 / 66.5400", gold:"$3,608 (نړیوال سپاټ)", btc:"$61,654", note:"د ډیجیټل کرنسیو بازار بیا په پراخه کچه پورته شو — ټولې ۲۱ کرنسۍ شنه وې (CoinGecko)؛ تېل: پټرول 78 / ډیزل 86 افغانۍ (د کابل راپور، ۲۱ نومبر)"},
+        {d:"۲۲ نومبر ۲۰۲۶ (پرون)", usd:"اخیستل 66.23 / پلورل 66.24 (د سرای شهزاده فیسبوک پاڼه، ۰۶:۲۵) · DAB نغد: 66.0395 / 66.2395", gold:"$3,538 (نړیوال سپاټ)", btc:"$59,012", note:"د ډیجیټل کرنسیو بازار په ۲۴ ساعتونو کې په پراخه کچه پورته شو (CoinGecko)"},
+        {d:"۲۱ نومبر ۲۰۲۶ (پرون)", usd:"اخیستل 66.00 / پلورل 66.05 (sarafi.af)", gold:"—", btc:"$60,114", note:"SAR 17.66 او AED 18.04 هم له sarafi.af څخه (۱۶:۳۹)؛ د ډیجیټل کرنسیو سنیپ‌شاټ ۲۲:۵۹ (CoinGecko)"},
+        {d:"۲۰ نومبر ۲۰۲۶", usd:"پلورل 66.05 (sarafi.af) · رسمي 65.11 (DAB)", gold:"$3,527.53 (sarafi.af، ۲۲:۱۰)", btc:"$59,326", note:"ډالر لږ ښکته (▼0.30٪)؛ سره زر ▼4.08٪"},
+        {d:"۱۹ نومبر ۲۰۲۶", usd:"اخیستل 66.00 / پلورل 66.05 (sarafi.af)", gold:"—", btc:"$61,987", note:"د سرای شهزاده وروستی تازه کېدل ۱۴:۱۶"},
+        {d:"۱۸ نومبر ۲۰۲۶", usd:"یورو پلورل 73.50 · ۱۰۰۰ کلدارې 235 (sarafi.af)", gold:"—", btc:"$63,068", note:"یورو ▲0.82٪ لوړ شو"},
+        {d:"۱۷ نومبر ۲۰۲۶", usd:"—", gold:"—", btc:"$64,947", note:"پټرول 85 او ډیزل 83 افغانۍ/لیټر (Pajhwok اونیز سروې، ۷ نومبر ۲۰۲۶)"}
+      ];
+      // ---------- last-updated stamps ----------
+      (function(){
+        var els = document.querySelectorAll(".upd");
+        for (var i=0;i<els.length;i++) els[i].textContent = AS_OF;
+      })();
+      // ---------- gold by karat (calculated from world spot) ----------
+      (function(){
+        var pure = GOLD.spotUSD / 31.1035; // USD per gram, 24K
+        function fmt(x){ return Math.round(x).toLocaleString("en-US"); }
+        document.getElementById("goldBody").innerHTML = KARATS.map(function(k){
+          var g = pure * k.f;
+          return '<tr><td><b>'+k.n+'</b></td>'
+            + '<td class="rate num lbl" data-l="ګرام">'+fmt(g*GOLD.usdAfn)+'</td>'
+            + '<td class="num lbl" data-l="مثقال">'+fmt(g*GOLD.usdAfn*4.6)+'</td>'
+            + '<td class="num lbl" data-l="توله">'+fmt(g*GOLD.usdAfn*11.6638)+'</td>'
+            + '<td class="num lbl" data-l="اونس">'+fmt(g*GOLD.usdAfn*31.1035)+'</td>'
+            + '<td class="num lbl" data-l="ګرام ډالر">$'+g.toFixed(2)+'</td>'
+            + '<td class="num lbl" data-l="ګرام کلدارې">'+fmt(g*GOLD.usdPkr)+'</td></tr>';
+        }).join("");
+      })();
+      // ---------- rate history ----------
+      document.getElementById("histBody").innerHTML = HISTORY.map(function(h){
+        return '<tr><td><b>'+h.d+'</b></td><td class="lbl" data-l="ډالر">'+h.usd+'</td><td class="num lbl" data-l="سره زر">'+h.gold+'</td><td class="num lbl" data-l="بټکوین">'+h.btc+'</td><td class="lbl" data-l="یادونه">'+h.note+'</td></tr>';
+      }).join("");
+
+      // ---------- Converter: value of 1 unit in AFN ----------
+      // Toman is quoted PER 1 MILLION: 1,000,000 toman = 239 AFN (Afaaq, 22 Nov 2026 — not in the 23 Nov Sarai Shahzada post).
+      var TOAFN = { AFN:1, USD:66.045, PKR:0.235, EUR:72.75, AED:18.10, TOMAN:239/1000000 };
+      var CNAMES = { AFN:"افغانۍ", USD:"ډالر", PKR:"کلدارې", EUR:"یورو", AED:"درهم", TOMAN:"تومان" };
+      function convert(){
+        var amt = parseFloat(document.getElementById("amt").value) || 0;
+        var f = document.getElementById("from").value;
+        var t = document.getElementById("to").value;
+        var res = amt * TOAFN[f] / TOAFN[t];
+        var txt = res.toLocaleString("en-US",{maximumFractionDigits: res < 100 ? 2 : 0});
+        if(t === "TOMAN" && res >= 1000000){
+          document.getElementById("out").textContent = txt + " تومان (≈ " + (res/1000000).toLocaleString("en-US",{maximumFractionDigits:2}) + " میلیون)";
+        } else if(t === "TOMAN" && res >= 100000){
+          document.getElementById("out").textContent = txt + " تومان (≈ " + (res/100000).toLocaleString("en-US",{maximumFractionDigits:1}) + " لک)";
+        } else {
+          document.getElementById("out").textContent = txt + " " + CNAMES[t];
+        }
+      }
+      document.getElementById("amt").addEventListener("input", convert);
+      document.getElementById("from").addEventListener("change", convert);
+      document.getElementById("to").addEventListener("change", convert);
+      document.getElementById("swap").addEventListener("click", function(){
+        var f = document.getElementById("from"), t = document.getElementById("to");
+        var tmp = f.value; f.value = t.value; t.value = tmp; convert();
+      });
+      convert();
+
+      // ---------- Digital currency profiles (separate page from live prices) ----------
+      var PROFILES = [
+        {sym:"BTC", name:"بټکوین — Bitcoin", color:"#f7931a",
+         creator:"ساتوشي ناکاموتو (Satoshi Nakamoto) — یو مستعار نوم؛ تر نن ورځې پورې یې اصلي پېژندګلوي معلومه نه ده.",
+         when:"۲۰۰۹ — د ۲۰۰۸ کال په اکتوبر کې یې سپین پاڼه (whitepaper) خپره شوه او د ۲۰۰۹ کال د جنورۍ په ۳مه یې شبکه پیل شوه.",
+         purpose:"د بانک او حکومت له منځګړي پرته، له یوه کس څخه بل ته مستقیم ډیجیټل پیسې لېږل؛ د «ډیجیټل سرو زرو» په توګه د ارزښت ساتل.",
+         supply:"تر ټولو زیات: ۲۱ میلیونه واحدونه (له دې زیات هېڅکله نه جوړېږي)؛ اوس په چلند کې ≈ ۲۰.۱ میلیونه.",
+         history:"له څو سینټو څخه پیل شو، په ۲۰۱۷ کې $20,000 ته، په ۲۰۲۱ کې $69,000 ته او په ۲۰۲۵ کې تر $120,000 پورته ورسېد. اوس (نومبر ۲۰۲۶) په یوه سخته سمون (correction) کې دی — په یوه میاشت کې شاوخوا ۲۵٪ ښکته شوی، خو لا هم د بازار تر ټولو لویه ډیجیټل کرنسي ده.",
+         gov:"له هیڅ حکومت یا مرکزي بانک سره تړاو نه لري. امریکا په ۲۰۲۴ کې د بټکوین ETF صندوقونه منظور کړل او په ۲۰۲۵ کې یې د بټکوین ستراتیژیکه زیرمه جوړه کړه — خو دا د حکومت پانګونه ده، نه د دې کرنسۍ مالکیت.",
+         why:"۲۱ نومبر ۲۰۲۶: بټکوین د ورځې تر $55,298 ښکته کېدو وروسته بېرته $60,114 ته ورغېد (۲۴ ساعته +۱.۹۰٪)؛ د ورځې د پیل پلور د ټکنالوژۍ ونډو له کمزورۍ او د Fed له وېرو سره تړلی و (CoinGecko · CoinDesk). د نن کره نرخ او ۲۴ ساعته بدلون د «ډیجیټل کرنسي» په پاڼه کې وګورئ — هلته شمېرې هرې ۶۰ ثانیې له CoinGecko څخه تازه کېږي.",
+         src:"CoinGecko · CoinMarketCap · Bitcoin.org (رسمي سپین پاڼه)"},
+        {sym:"ETH", name:"ایتیریم — Ethereum", color:"#627eea",
+         creator:"ویتالیک بوټرین (Vitalik Buterin) او ملګري یې (ګاوین ووډ، جوزیف لوبین او نور).",
+         when:"۲۰۱۵ — بوټرین یې نظر په ۲۰۱۳ کې وړاندې کړ او شبکه د ۲۰۱۵ کال د جولای په ۳۰مه پیل شوه.",
+         purpose:"یوازې پیسې نه دي — یو نړیوال کمپیوټر دی: پرې سمارټ تړونونه (smart contracts)، ډیجیټل اپونه (dApps)، NFT او DeFi جوړېږي.",
+         supply:"ثابت حد نه لري؛ اوس ≈ ۱۲۰ میلیونه ETH په چلند کې دي. له ۲۰۲۲ (The Merge) راهیسې یې شبکه د Proof-of-Stake په نظام روانه ده او کله کله یې عرضه کمېږي هم.",
+         history:"په ۲۰۱۵ کې له $1 څخه لږ پیل شو، په ۲۰۲۱ کې نږدې $4,900 ته ورسېد. د ۲۰۲۶ کال د نومبر په ۲۱مه یې بیه $1,682.21 وه.",
+         gov:"له هیڅ حکومت سره تړاو نه لري؛ د Ethereum Foundation یو غیرانتفاعي بنسټ دی. امریکا په ۲۰۲۴ کې د ایتیریم ETF صندوقونه منظور کړل.",
+         why:"۲۱ نومبر ۲۰۲۶: په ۲۴ ساعتونو کې +۳.۰۱٪ پورته شو ($1,682.21) — د بټکوین له رغېدو سره یوځای (CoinGecko). د نن کره نرخ او ۲۴ ساعته بدلون د «ډیجیټل کرنسي» په پاڼه کې وګورئ — هلته شمېرې هرې ۶۰ ثانیې له CoinGecko څخه تازه کېږي.",
+         src:"CoinGecko · CoinMarketCap · Ethereum.org (رسمي وېبپاڼه)"},
+        {sym:"SOL", name:"سولانا — Solana", color:"#0e9f6e",
+         creator:"اناتولي یاکووینکو (Anatoly Yakovenko) او Solana Labs ټیم.",
+         when:"۲۰۲۰ — شبکه د ۲۰۲۰ کال په مارچ کې پیل شوه.",
+         purpose:"ډېر ګړندي او ارزانه لېږدونه — په ثانیه کې زرګونه ټرانزیکشنونه د پیسو، اپونو او NFT لپاره، د ایتیریم د سیال په توګه.",
+         supply:"ثابت حد نه لري؛ اوس ≈ ۵۵۰ میلیونه SOL په چلند کې دي، د انفلاسیون کچه یې هر کال کمېږي.",
+         history:"په ۲۰۲۰ کې له $1 څخه لږ پیل شو، په ۲۰۲۱ کې $260 ته وخوت، بیا د FTX صرافي له نسکورېدو سره (۲۰۲۲) تر $10 لاندې ښکته شو، وروسته بېرته ورغېد. د ۲۰۲۶ کال د نومبر په ۲۱مه یې بیه $70.68 وه.",
+         gov:"له هیڅ حکومت سره تړاو نه لري. په امریکا کې د سولانا ETF صندوقونه په ۲۰۲۵ کې پیل شول.",
+         why:"۲۱ نومبر ۲۰۲۶: په ۲۴ ساعتونو کې +۱.۹۱٪ پورته شو ($70.68) — د بازار له عمومي رغېدو سره سم؛ جلا ځانګړی خبر یې نشته (CoinGecko). د نن کره نرخ او ۲۴ ساعته بدلون د «ډیجیټل کرنسي» په پاڼه کې وګورئ — هلته شمېرې هرې ۶۰ ثانیې له CoinGecko څخه تازه کېږي.",
+         src:"CoinGecko · CoinMarketCap · Solana.com (رسمي وېبپاڼه)"},
+        {sym:"XRP", name:"ایکس آر پي — XRP", color:"#4a6fa5",
+         creator:"ډیویډ شوارټز، جیډ مک‌کالیب او ارتور بریټو (د XRP Ledger جوړوونکي)؛ وروسته د Ripple کمپنۍ له خوا وکارول شو.",
+         when:"۲۰۱۲ — XRP Ledger د ۲۰۱۲ کال په جون کې پیل شو.",
+         purpose:"د بانکونو او کمپنیو ترمنځ ګړندي، ارزانه نړیوال لېږدونه — لکه د SWIFT یو ګړندی بدیل؛ هر لېږد په ۳–۵ ثانیو کې ترسره کېږي.",
+         supply:"تر ټولو زیات: ۱۰۰ میلیارده XRP (ټول له پیل څخه جوړ شوي)؛ اوس ≈ ۶۰ میلیارده په چلند کې دي.",
+         history:"په ۲۰۱۸ کې $3.84 ته ورسېد، بیا د امریکا د SEC له قضیې (۲۰۲۰–۲۰۲۵) سره تر فشار لاندې و. قضیه په ۲۰۲۵ کې د Ripple په ګټه پای ته ورسېده. د ۲۰۲۶ کال د نومبر په ۲۱مه یې بیه $0.9321 وه.",
+         gov:"دا ډیجیټل کرنسي غیرمتمرکزه ده، خو Ripple یوه امریکايي خصوصي کمپنۍ ده چې له بانکونو سره کار کوي — د حکومت ملکیت نه دی. د SEC قضیې پای ته رسېدو یې قانوني حالت روښانه کړ.",
+         why:"۲۱ نومبر ۲۰۲۶: په ۲۴ ساعتونو کې +۲.۴۶٪ پورته شو ($0.9321) — د بازار له عمومي رغېدو سره سم (CoinGecko). د نن کره نرخ او ۲۴ ساعته بدلون د «ډیجیټل کرنسي» په پاڼه کې وګورئ — هلته شمېرې هرې ۶۰ ثانیې له CoinGecko څخه تازه کېږي.",
+         src:"CoinGecko · CoinMarketCap · XRPL.org / Ripple.com (رسمي)"},
+        {sym:"BNB", name:"بایننس — BNB", color:"#c99400",
+         creator:"د Binance صرافي (چانګپینګ ژاو — CZ) له خوا جوړ شو.",
+         when:"۲۰۱۷ — د Binance صرافي له پیل سره یوځای خپور شو.",
+         purpose:"د Binance په صرافي کې د فیس کمښت، او د BNB Chain پر شبکې د اپونو او لېږدونو لپاره ګاز (فیس).",
+         supply:"له ۲۰۰ میلیونو څخه پیل شو؛ Binance یې په منظم ډول سوځوي (burn) تر څو ۱۰۰ میلیونو ته راکم شي. اوس ≈ ۱۴۰ میلیونه په چلند کې دي.",
+         history:"په ۲۰۱۷ کې $0.10 و، په ۲۰۲۱ کې $690 ته او په ۲۰۲۵ کې تر $1,300 پورته ورسېد. د ۲۰۲۶ کال د نومبر په ۲۱مه یې بیه $548.42 وه.",
+         gov:"له حکومت سره تړاو نه لري؛ د یوې خصوصي صرافي ډیجیټل کرنسي ده. Binance په ۲۰۲۳ کې په امریکا کې قضیه ومنله او جریمه یې ورکړه؛ بنسټګر یې CZ په ۲۰۲۵ کې بښنه ترلاسه کړه.",
+         why:"۲۱ نومبر ۲۰۲۶: په ۲۴ ساعتونو کې +۰.۹۸٪ پورته شو ($548.42) — د بازار له عمومي رغېدو سره سم (CoinGecko). د نن کره نرخ او ۲۴ ساعته بدلون د «ډیجیټل کرنسي» په پاڼه کې وګورئ — هلته شمېرې هرې ۶۰ ثانیې له CoinGecko څخه تازه کېږي.",
+         src:"CoinGecko · CoinMarketCap · BNBChain.org (رسمي)"},
+        {sym:"USDT", name:"ټیټر — Tether (USDT)", color:"#26a17b",
+         creator:"د Tether کمپنۍ (پخوانی Realcoin) — بروک پیرس، ریو کولینز او کریګ سیلرز یې له بنسټګرو څخه وو.",
+         when:"۲۰۱۴ — په ۲۰۱۴ کې خپور شو.",
+         purpose:"stablecoin — هر USDT باید د ۱ امریکايي ډالر ارزښت ولري، تر څو سوداګر په ډیجیټل کرنسي بازار کې له بدلون پرته «ډالر» وساتي او ولېږدوي.",
+         supply:"ثابت حد نه لري — د غوښتنې له مخې خپرېږي؛ اوس تر $180$ میلیارده زیات USDT په چلند کې دي او تر ټولو لوی stablecoin دی.",
+         history:"بیه یې نږدې تل $1.00 پاتې شوې ده — همدا یې موخه ده؛ لوړوالی او ښکته‌والی یې تقریباً صفر دی. په بحراني ورځو کې کله کله د څو سینټو لنډ توپیر رامنځته شوی او بېرته سم شوی.",
+         gov:"د حکومت نه دی — یوه خصوصي کمپنۍ یې خپروي او وايي چې زیرمې یې په ډالرو او امریکايي خزانه‌دارۍ پاڼو (T-bills) کې ساتي. دا د مرکزي بانک له CBDC څخه بېل دی: CBDC پخپله د مرکزي بانک لخوا خپرېږي، USDT نه.",
+         why:"نن ثابت دی ($1.00): stablecoin دی، بیه یې له ډالر سره تړل شوې ده (CoinGecko).",
+         src:"CoinGecko · CoinMarketCap · Tether.to (رسمي)"},
+        {sym:"DOGE", name:"ډاجکوین — Dogecoin", color:"#b8860b",
+         creator:"بیلي مارکس (Billy Markus) او جیکسن پالمر (Jackson Palmer) — دوه سافټویر انجنیران.",
+         when:"۲۰۱۳ — د ۲۰۱۳ کال د ډسمبر په ۶مه د ټوکې (meme) په توګه پیل شو؛ د Shiba Inu سپي له مشهور انټرنېټي میم څخه یې الهام اخیستی.",
+         purpose:"په اصل کې ټوکه وه، خو په ارزانه او ګړندي کوچني لېږدونو او ټیپ (انعام) ورکولو مشهور شو؛ د Litecoin له کوډ څخه جوړ شوی.",
+         supply:"ثابت حد نه لري — هره دقیقه ۱۰٬۰۰۰ نوي DOGE جوړېږي (په کال ≈ ۵.۲ میلیارده)؛ اوس ≈ ۱۵۰ میلیارده په چلند کې دي.",
+         history:"په ۲۰۱۳ کې له یوې سینټې څخه په کمه بیه پیل شو؛ په ۲۰۲۱ کې د ایلان ماسک د ټویټونو په څپه کې $0.73 ته وخوت — خپل تر ټولو لوړ نرخ — بیا بېرته ډېر ښکته شو. د میم ډیجیټل کرنسیو تر ټولو زوړ او پېژندل شوی دی.",
+         gov:"له هیڅ حکومت سره تړاو نه لري؛ یو پرانیستی، ټولنیز پروژه ده چې د Dogecoin Foundation یې ملاتړ کوي.",
+         why:"د نن کره نرخ او ۲۴ ساعته بدلون د «ډیجیټل کرنسي» په پاڼه کې وګورئ — هلته شمېرې هرې ۶۰ ثانیې له CoinGecko څخه تازه کېږي. میم کرنسۍ معمولاً له بټکوین څخه ډېرې لوړې او ښکته کېږي (CoinGecko).",
+         src:"CoinGecko · CoinMarketCap · Dogecoin.com (رسمي)"},
+        {sym:"ADA", name:"کارډانو — Cardano (ADA)", color:"#0033ad",
+         creator:"چارلز هاسکینسن (Charles Hoskinson) — د ایتیریم له بنسټګرو څخه یو — او د IOHK کمپنۍ.",
+         when:"۲۰۱۷ — شبکه د ۲۰۱۷ کال په سپتمبر کې پیل شوه؛ نوم یې د ایټالوي ریاضي‌پوه جیرولامو کارډانو په نوم دی.",
+         purpose:"یوه علمي، څېړنې-محوره شبکه: هر ګام یې لومړی په پوهنتونونو کې څېړل کېږي او بیا عملي کېږي؛ سمارټ تړونونه او ډیجیټل اپونه پرې جوړېږي.",
+         supply:"تر ټولو زیات: ۴۵ میلیارده ADA؛ اوس ≈ ۳۵–۳۶ میلیارده په چلند کې دي.",
+         history:"په ۲۰۱۷ کې له څو سینټو پیل شو، په ۲۰۲۱ کې یې تر ټولو لوړ نرخ $3.10 ته ورسېد، بیا په اوږد بازار کې ډېر ښکته شو. د ودې سرعت یې د سیالانو په پرتله ورو، خو بنسټ یې علمي بلل کېږي.",
+         gov:"له هیڅ حکومت سره تړاو نه لري؛ د Cardano Foundation (سویډن) او IOHK یې ملاتړ کوي.",
+         why:"د نن کره نرخ او ۲۴ ساعته بدلون د «ډیجیټل کرنسي» په پاڼه کې وګورئ — هلته شمېرې هرې ۶۰ ثانیې له CoinGecko څخه تازه کېږي.",
+         src:"CoinGecko · CoinMarketCap · Cardano.org (رسمي)"},
+        {sym:"TRX", name:"ټرون — TRON (TRX)", color:"#c0272d",
+         creator:"جسټین سن (Justin Sun) او د TRON Foundation بنسټ.",
+         when:"۲۰۱۷ — په ۲۰۱۷ کې په ایتیریم کې د ټوکن په توګه پیل شو او په ۲۰۱۸ کې یې خپله خپلواکه شبکه پیل کړه.",
+         purpose:"د منځپانګې (ویډیو، لوبو) او ارزانه لېږدونو شبکه؛ نن په نړۍ کې د USDT تر ټولو زیات لېږدونه پر همدې شبکې کېږي، ځکه فیس یې ډېر کم دی.",
+         supply:"ثابت رسمي حد نه لري؛ ټوله عرضه ≈ ۹۴ میلیارده وه او د سوځولو (burn) له امله ورو ورو کمېږي — اوس ≈ ۸۶–۹۴ میلیارده په چلند کې دي.",
+         history:"په ۲۰۱۷ کې له $0.002 څخه پیل شو، په ۲۰۱۸ کې $0.30 ته وخوت، بیا د کلونو لپاره په سینټونو کې پاتې شو او په ۲۰۲۴–۲۰۲۵ کې بېرته پیاوړی شو. په افغانستان کې هم د USDT لېږد لپاره ډېر کارېږي.",
+         gov:"له هیڅ حکومت سره تړاو نه لري؛ جسټین سن په ۲۰۲۵ کې د ګریناډا لخوا د WTO سفیر وټاکل شو، خو دا د کرنسۍ حکومتي تړاو نه دی.",
+         why:"د نن کره نرخ او ۲۴ ساعته بدلون د «ډیجیټل کرنسي» په پاڼه کې وګورئ — هلته شمېرې هرې ۶۰ ثانیې له CoinGecko څخه تازه کېږي.",
+         src:"CoinGecko · CoinMarketCap · Tron.network (رسمي)"},
+        {sym:"LINK", name:"چین‌لینک — Chainlink (LINK)", color:"#2a5ada",
+         creator:"سرګي نزاروف (Sergey Nazarov) او سټیو ایلیس (Steve Ellis).",
+         when:"۲۰۱۷ — ټوکن یې د ۲۰۱۷ کال په سپتمبر کې د ICO له لارې وپلورل شو او شبکه په ۲۰۱۹ کې پیل شوه.",
+         purpose:"«اوراکل» شبکه ده: له بهرنۍ نړۍ څخه کره معلومات (نرخونه، هوا، پایلې) بلاکچینونو ته رسوي — بې له دې سمارټ تړونونه په ریښتینې نړۍ نه پوهېږي.",
+         supply:"تر ټولو زیات: ۱ میلیارد LINK؛ اوس ≈ ۶۶۰–۶۸۰ میلیونه په چلند کې دي.",
+         history:"په ۲۰۱۷ کې له $0.13 څخه پیل شو، په ۲۰۲۱ کې یې تر ټولو لوړ نرخ $52.88 ته ورسېد، بیا ښکته شو. د اوراکل په برخه کې تر اوسه د بازار مشر پاتې شوی.",
+         gov:"له هیڅ حکومت سره تړاو نه لري؛ Chainlink Labs یوه خصوصي کمپنۍ ده.",
+         why:"د نن کره نرخ او ۲۴ ساعته بدلون د «ډیجیټل کرنسي» په پاڼه کې وګورئ — هلته شمېرې هرې ۶۰ ثانیې له CoinGecko څخه تازه کېږي.",
+         src:"CoinGecko · CoinMarketCap · Chain.link (رسمي)"},
+        {sym:"ENA", name:"ایتینا — Ethena (ENA)", color:"#3a3f4a",
+         creator:"ګای یانګ (Guy Young) — د Ethena Labs بنسټګر او مشر.",
+         when:"۲۰۲۴ — ENA ټوکن د ۲۰۲۴ کال په اپرېل کې پیل شو؛ د پروټوکول «مصنوعي ډالر» USDe تر هغه لږ مخکې خپور شوی و.",
+         purpose:"ENA د Ethena پروټوکول د ادارې (governance) ټوکن دی؛ پروټوکول USDe جوړوي — یو ډالر-ارزښت لرونکی ډیجیټل اسعار چې د بانکي زیرمو پر ځای د ډیجیټل کرنسیو او فیوچرز پوزېشنونو په ضمانت ولاړ دی.",
+         supply:"تر ټولو زیات: ۱۵ میلیارده ENA؛ اوس یې لویه برخه په چلند کې ده او پاتې یې په مهالوېش سره خلاصېږي.",
+         history:"په اپرېل ۲۰۲۴ کې له $0.64 شاوخوا پیل شو او ژر یې تر ټولو لوړ نرخ $1.52 ته ورسېد، بیا په تدریجي ډول ډېر ښکته شو. پوهان یې ګټه لوړه خو خطر یې هم لوړ بولي، ځکه USDe په پېچلي فیوچرز سیسټم ولاړ دی.",
+         gov:"له هیڅ حکومت سره تړاو نه لري؛ یوه خصوصي کمپنۍ (Ethena Labs) او بنسټ یې چلوي. USDe د مرکزي بانک CBDC نه دی.",
+         why:"د نن کره نرخ او ۲۴ ساعته بدلون د «ډیجیټل کرنسي» په پاڼه کې وګورئ — هلته شمېرې هرې ۶۰ ثانیې له CoinGecko څخه تازه کېږي.",
+         src:"CoinGecko · CoinMarketCap · Ethena.fi (رسمي)"},
+        {sym:"TON", name:"ټونکوین — Toncoin (TON)", color:"#0098ea",
+         creator:"نیکولای او پاول دوروف (Nikolai & Pavel Durov) — د Telegram بنسټګران؛ پروژه په ۲۰۱۸ کې Telegram پیل کړه.",
+         when:"۲۰۱۸–۲۰۲۱ — Telegram په ۲۰۱۸ کې $1.7$ میلیارده راټول کړل، خو د امریکا SEC په ۲۰۲۰ کې پروژه ودروله؛ په ۲۰۲۱ کې ټولنې یې پرانیستی کوډ بېرته ژوندی کړ او نوم یې The Open Network شو.",
+         purpose:"د Telegram دننه د پیسو لېږد، کوچني اپونه (mini apps) او لوبې — تر څو سلګونه میلیونه Telegram کاروونکي په اسانۍ ډیجیټل کرنسي وکاروي.",
+         supply:"لومړنۍ عرضه ۵ میلیارده وه؛ اوس ≈ ۵.۱ میلیارده په چلند کې دي او شبکه لږ کلنی انفلاسیون (≈ ۰.۶٪) لري — ثابت وروستی حد نه لري.",
+         history:"د ټولنې له ژوندي کولو وروسته په ۲۰۲۴ کې یې تر ټولو لوړ نرخ $8.24 ته ورسېد (د Telegram لوبو او اییرډراپونو په څپه کې)، بیا بېرته ښکته شو. د Pavel Durov د ۲۰۲۴ کال قانوني ستونزو هم پرې لنډمهاله اغېز وکړ.",
+         gov:"له حکومت سره تړاو نه لري؛ د TON Foundation (غیرانتفاعي بنسټ) یې ملاتړ کوي او Telegram ورسره نږدې تخنیکي همکاري لري — خو د کوم دولت یا مرکزي بانک کرنسي نه ده.",
+         why:"د نن کره نرخ او ۲۴ ساعته بدلون د «ډیجیټل کرنسي» په پاڼه کې وګورئ — هلته شمېرې هرې ۶۰ ثانیې له CoinGecko څخه تازه کېږي.",
+         src:"CoinGecko · CoinMarketCap · Ton.org (رسمي)"},
+        {sym:"USDC", name:"یو ایس ډي کوين — USD Coin (USDC)", color:"#2775ca",
+         creator:"د Circle کمپنۍ (د Coinbase سره په ګډه د Centre کنسورشیم له لارې) — جرمي الایر (Jeremy Allaire) د Circle له بنسټګرو څخه دی.",
+         when:"۲۰۱۸ — د ۲۰۱۸ کال په سپتمبر کې خپور شو.",
+         purpose:"stablecoin — هر USDC د ۱ امریکايي ډالر په زیرمه (نغدې او لنډمهاله خزانه‌دارۍ پاڼې) ولاړ دی؛ د ډیجیټل ډالر په توګه د لېږد او سپما لپاره کارېږي او زیرمې یې په منظم ډول پلټل (audit) کېږي.",
+         supply:"ثابت حد نه لري — د تقاضا له مخې جوړېږي او بېرته اخیستل کېږي؛ په چلند کې یې اندازه د بازار له اړتیا سره بدلېږي (لسګونه میلیارده ډالر).",
+         history:"بیه یې نږدې تل $1.00 پاتې شوې ده — همدا یې موخه ده. یوازې په مارچ ۲۰۲۳ کې، د Silicon Valley Bank له نسکورېدو سره، لنډ وخت $0.87 ته ښکته شو او ژر بېرته $1 شو.",
+         gov:"د حکومت نه دی — یوه خصوصي امریکايي کمپنۍ (Circle) یې خپروي او تر امریکايي مقرراتو لاندې کار کوي؛ د مرکزي بانک CBDC نه دی.",
+         why:"نن ثابت دی ($1.00): stablecoin دی، بیه یې له ډالر سره تړل شوې ده (CoinGecko).",
+         src:"CoinGecko · CoinMarketCap · Circle.com (رسمي)"},
+        {sym:"LTC", name:"لایټکوین — Litecoin (LTC)", color:"#345d9d",
+         creator:"چارلي لي (Charlie Lee) — د Google پخوانی انجنیر.",
+         when:"۲۰۱۱ — د ۲۰۱۱ کال په اکتوبر کې پیل شو؛ د بټکوین له کوډ څخه جوړ شوی (fork) دی.",
+         purpose:"د بټکوین «سپین زر» بلل کېږي: هماغه نظریه، خو ګړندي (بلاک په ۲.۵ دقیقو کې) او ارزانه لېږدونه د ورځنيو پیسو لپاره.",
+         supply:"تر ټولو زیات: ۸۴ میلیونه LTC (د بټکوین څلور چنده)؛ اوس ≈ ۷۶ میلیونه په چلند کې دي.",
+         history:"په ۲۰۱۱ کې له څو سینټو پیل شو؛ په ۲۰۱۷ کې $375 او په ۲۰۲۱ کې یې تر ټولو لوړ نرخ $412 ته ورسېد، بیا بېرته ښکته شو. د پخوانیو کرنسیو له ډلې تر اوسه په لویو صرافیو کې پاتې دی.",
+         gov:"له هیڅ حکومت سره تړاو نه لري؛ د Litecoin Foundation یې ملاتړ کوي.",
+         why:"د نن کره نرخ او ۲۴ ساعته بدلون د «ډیجیټل کرنسي» په پاڼه کې وګورئ — هلته شمېرې هرې ۶۰ ثانیې له CoinGecko څخه تازه کېږي.",
+         src:"CoinGecko · CoinMarketCap · Litecoin.org (رسمي)"},
+        {sym:"DOT", name:"پولکاډاټ — Polkadot (DOT)", color:"#e6007a",
+         creator:"ګاوین ووډ (Gavin Wood) — د ایتیریم له بنسټګرو او د Solidity ژبې جوړوونکی — د Web3 Foundation له لارې.",
+         when:"۲۰۲۰ — شبکه د ۲۰۲۰ کال په مې کې پیل شوه.",
+         purpose:"بېلابېل بلاکچینونه سره نښلوي: هره پروژه خپل ځانګړی چین (parachain) جوړولی شي او ټول د یوې ګډې امنیتي شبکې لاندې کار کوي.",
+         supply:"ثابت حد نه لري — کلنی انفلاسیون لري؛ اوس ≈ ۱.۵–۱.۶ میلیارده DOT په چلند کې دي.",
+         history:"په ۲۰۲۰ کې له ≈ $2.70 څخه پیل شو، په نومبر ۲۰۲۱ کې یې تر ټولو لوړ نرخ $55 ته ورسېد، بیا په اوږد کمزوري بازار کې ډېر ښکته شو.",
+         gov:"له هیڅ حکومت سره تړاو نه لري؛ Web3 Foundation یو غیرانتفاعي بنسټ دی (سویډن).",
+         why:"د نن کره نرخ او ۲۴ ساعته بدلون د «ډیجیټل کرنسي» په پاڼه کې وګورئ — هلته شمېرې هرې ۶۰ ثانیې له CoinGecko څخه تازه کېږي.",
+         src:"CoinGecko · CoinMarketCap · Polkadot.network (رسمي)"},
+        {sym:"AVAX", name:"اوالانچ — Avalanche (AVAX)", color:"#e84142",
+         creator:"امین ګون سیرر (Emin Gün Sirer) — د Cornell پوهنتون پروفیسور — او د Ava Labs ټیم.",
+         when:"۲۰۲۰ — شبکه د ۲۰۲۰ کال په سپتمبر کې پیل شوه.",
+         purpose:"ګړندۍ او ارزانه شبکه د سمارټ تړونونو او اپونو لپاره؛ هره اداره یا پروژه خپل جلا فرعي شبکه (subnet) جوړولی شي.",
+         supply:"تر ټولو زیات: ۷۲۰ میلیونه AVAX؛ اوس ≈ ۴۲۰ میلیونه په چلند کې دي.",
+         history:"په ۲۰۲۰ کې له څو ډالرو پیل شو، په نومبر ۲۰۲۱ کې یې تر ټولو لوړ نرخ $146 ته ورسېد، بیا د بازار په کمزورۍ کې ډېر ښکته شو.",
+         gov:"له هیڅ حکومت سره تړاو نه لري؛ Ava Labs یوه خصوصي کمپنۍ ده.",
+         why:"د نن کره نرخ او ۲۴ ساعته بدلون د «ډیجیټل کرنسي» په پاڼه کې وګورئ — هلته شمېرې هرې ۶۰ ثانیې له CoinGecko څخه تازه کېږي.",
+         src:"CoinGecko · CoinMarketCap · Avax.network (رسمي)"},
+        {sym:"NEAR", name:"نییر — NEAR Protocol (NEAR)", color:"#0e7a5f",
+         creator:"ایلیا پولوسوخین (Illia Polosukhin) او الکساندر سکیدانوف (Alexander Skidanov).",
+         when:"۲۰۲۰ — شبکه د ۲۰۲۰ کال په اپرېل–اکتوبر کې پړاو په پړاو پیل شوه.",
+         purpose:"د کاروونکو او پروګرام جوړوونکو لپاره اسانه شبکه: د انسانانو په څېر د حساب نومونه او ګړندي، ارزانه لېږدونه؛ بنسټګر یې اوس د مصنوعي ځیرکتیا (AI) په برخه کې هم کار کوي.",
+         supply:"لومړنۍ عرضه ۱ میلیارد وه؛ کلنی انفلاسیون ≈ ۵٪ لري او اوس ≈ ۱.۲۵ میلیارده په چلند کې دي — ثابت وروستی حد نه لري.",
+         history:"په ۲۰۲۰ کې له ≈ $1 څخه پیل شو، په جنوري ۲۰۲۲ کې یې تر ټولو لوړ نرخ $20.42 ته ورسېد، بیا ډېر ښکته شو.",
+         gov:"له هیڅ حکومت سره تړاو نه لري؛ د NEAR Foundation یې ملاتړ کوي.",
+         why:"د نن کره نرخ او ۲۴ ساعته بدلون د «ډیجیټل کرنسي» په پاڼه کې وګورئ — هلته شمېرې هرې ۶۰ ثانیې له CoinGecko څخه تازه کېږي.",
+         src:"CoinGecko · CoinMarketCap · Near.org (رسمي)"},
+        {sym:"SUI", name:"سوی — Sui (SUI)", color:"#4da2ff",
+         creator:"د Mysten Labs کمپنۍ — بنسټګران یې (ایوان چینګ، سام بلیکشیر او نور) د Meta (Facebook) د Diem پروژې پخواني انجنیران دي.",
+         when:"۲۰۲۳ — شبکه د ۲۰۲۳ کال د مې په ۳مه پیل شوه.",
+         purpose:"ګړندۍ شبکه د لوبو، پیسو او ډیجیټل شتمنیو لپاره؛ هره شتمني پکې د جلا «څیز» (object) په توګه ساتل کېږي، نو ډېر لېږدونه په یو وخت کې کېدای شي.",
+         supply:"تر ټولو زیات: ۱۰ میلیارده SUI؛ اوس ≈ ۳.۵–۴ میلیارده په چلند کې دي او پاتې یې په مهالوېش سره خلاصېږي.",
+         history:"په ۲۰۲۳ کې له ≈ $1.40 څخه پیل شو، د بازار په کمزورۍ کې $0.36 ته ښکته شو، بیا په جنوري ۲۰۲۵ کې یې تر ټولو لوړ نرخ $5.35 ته ورسېد او وروسته بېرته ښکته شو — د ټوکنونو د خلاصېدو (unlock) مهالوېش پر بیه فشار اچوي.",
+         gov:"له هیڅ حکومت سره تړاو نه لري؛ Mysten Labs خصوصي کمپنۍ او Sui Foundation یې ملاتړ کوي.",
+         why:"د نن کره نرخ او ۲۴ ساعته بدلون د «ډیجیټل کرنسي» په پاڼه کې وګورئ — هلته شمېرې هرې ۶۰ ثانیې له CoinGecko څخه تازه کېږي.",
+         src:"CoinGecko · CoinMarketCap · Sui.io (رسمي)"},
+        {sym:"SHIB", name:"شیبا اینو — Shiba Inu (SHIB)", color:"#cc7a00",
+         creator:"یو ناپېژانده کس یا ډله د «Ryoshi» په مستعار نوم.",
+         when:"۲۰۲۰ — د ۲۰۲۰ کال په اګست کې په ایتیریم کې د ټوکن په توګه پیل شو او ځان یې د «ډاجکوین وژونکی» باله.",
+         purpose:"میم کرنسي ده چې وروسته یې خپل ایکوسیستم جوړ کړ: خپله صرافي (ShibaSwap)، لوبې او د Shibarium په نوم خپله شبکه.",
+         supply:"له ۱ کواډریلیون (۱۰۰۰ ټریلیون) څخه پیل شو؛ نیم یې ویتالیک بوټرین ته ولېږل شول او هغه یې ډېره برخه وسوځوله — اوس ≈ ۵۸۹ ټریلیونه په چلند کې دي.",
+         history:"په ۲۰۲۰ کې له نږدې صفر څخه پیل شو؛ په اکتوبر ۲۰۲۱ کې یې تر ټولو لوړ نرخ ته ورسېد او زرګونه کوچني پانګوال یې شتمن کړل، بیا تر ۹۰٪ زیات ښکته شو. بیه یې ډېره په ټولنیز شور او بازار پورې تړلې ده.",
+         gov:"له هیڅ حکومت سره تړاو نه لري؛ یوه ټولنیزه پروژه ده چې رسمي مشر نه لري.",
+         why:"د نن کره نرخ او ۲۴ ساعته بدلون د «ډیجیټل کرنسي» په پاڼه کې وګورئ — هلته شمېرې هرې ۶۰ ثانیې له CoinGecko څخه تازه کېږي. میم کرنسۍ معمولاً تر نورو ډېرې ښکته او پورته کېږي (CoinGecko).",
+         src:"CoinGecko · CoinMarketCap · Shibatoken.com (رسمي)"},
+        {sym:"UNI", name:"یونيسواپ — Uniswap (UNI)", color:"#d6006d",
+         creator:"هایډن اډمز (Hayden Adams) — د Uniswap Labs بنسټګر.",
+         when:"۲۰۲۰ — UNI ټوکن د ۲۰۲۰ کال په سپتمبر کې خپور شو؛ خپله صرافي (Uniswap) له ۲۰۱۸ راهیسې کار کوي.",
+         purpose:"UNI د Uniswap د ادارې ټوکن دی — Uniswap تر ټولو لویه غیرمتمرکزه صرافي (DEX) ده چې پکې خلک بې له منځګړي شرکت څخه کرنسۍ سره بدلوي.",
+         supply:"تر ټولو زیات: ۱ میلیارد UNI؛ اوس ≈ ۶۰۰ میلیونه په چلند کې دي.",
+         history:"په سپتمبر ۲۰۲۰ کې کاروونکو ته وړیا (airdrop) ورکړل شو او له ≈ $3 څخه پیل شو؛ په مې ۲۰۲۱ کې یې تر ټولو لوړ نرخ $44.97 ته ورسېد، بیا ډېر ښکته شو.",
+         gov:"له هیڅ حکومت سره تړاو نه لري؛ Uniswap Labs خصوصي کمپنۍ ده او پرېکړې د ټوکن لرونکو په رایو کېږي.",
+         why:"د نن کره نرخ او ۲۴ ساعته بدلون د «ډیجیټل کرنسي» په پاڼه کې وګورئ — هلته شمېرې هرې ۶۰ ثانیې له CoinGecko څخه تازه کېږي.",
+         src:"CoinGecko · CoinMarketCap · Uniswap.org (رسمي)"},
+        {sym:"PEPE", name:"پیپي — Pepe (PEPE)", color:"#3d8130",
+         creator:"ناپېژانده جوړوونکي — هېڅکله یې پېژندګلوي معلومه نه شوه. نوم او نښان یې د «Pepe the Frog» له انټرنېټي میم څخه دی چې کارټونیسټ Matt Furie په ۲۰۰۵ کې جوړ کړی و — خو پروژه له هغه سره رسمي تړاو نه لري.",
+         when:"۲۰۲۳ — د ۲۰۲۳ کال په اپرېل کې په ایتیریم کې په پټه (stealth) توګه پیل شو، بې له کومې مخکینۍ اعلانې پلورنې.",
+         purpose:"خالص میم کرنسي ده — پخپله پروژه په رښتیا وايي چې هېڅ عملي کار نه لري او یوازې د تفریح او ټولنې لپاره ده. همدا رښتینولي یې د خلکو خوښه شوه.",
+         supply:"ټوله عرضه: ۴۲۰.۶۹ ټریلیونه PEPE — ټول په پیل کې جوړ شول، نوي نه شي جوړېدای او یوه برخه یې سوځول شوې هم ده.",
+         history:"په اپرېل ۲۰۲۳ کې له نږدې صفر څخه پیل شو او په درېیو اونیو کې یې د بازار ارزښت $1$ میلیارد ته ورسېد؛ په ډسمبر ۲۰۲۴ کې یې تر ټولو لوړ نرخ ته ورسېد، بیا ډېر ښکته شو. د میم کرنسیو تر ټولو بې‌ثباته او خطرناکه ډله ده.",
+         gov:"له هیڅ حکومت سره تړاو نه لري؛ رسمي ټیم او دفتر نه لري — ټولنه یې چلوي.",
+         why:"د نن کره نرخ او ۲۴ ساعته بدلون د «ډیجیټل کرنسي» په پاڼه کې وګورئ — هلته شمېرې هرې ۶۰ ثانیې له CoinGecko څخه تازه کېږي. میم کرنسۍ د شور او احساساتو له مخې تر ټولو ډېر بدلون کوي (CoinGecko).",
+         src:"CoinGecko · CoinMarketCap · Pepe.vision (رسمي وېبپاڼه)"}
+      ];
+      document.getElementById("profileGrid").innerHTML = PROFILES.map(function(p){
+        return '<article class="card coin"><div class="top"><span class="sym" style="background:'+p.color+'">'+p.sym+'</span><h3 style="margin:0">'+p.name+'</h3></div>'
+          + '<details><summary>بشپړ معلومات وګورئ</summary>'
+          + '<p><b>جوړوونکی:</b> '+p.creator+'</p>'
+          + '<p><b>د جوړېدو وخت:</b> '+p.when+'</p>'
+          + '<p><b>موخه:</b> '+p.purpose+'</p>'
+          + '<p><b>عرضه (Supply):</b> '+p.supply+'</p>'
+          + '<p><b>له پیل څخه تر اوسه:</b> '+p.history+'</p>'
+          + '<p><b>حکومتي تړاو:</b> '+p.gov+'</p>'
+          + '<p><b>نن ولې پورته/ښکته دی؟</b> '+p.why+'</p>'
+          + '<p class="src">سرچینې: '+p.src+'</p>'
+          + '</details></article>';
+      }).join("");
+
+      // ---------- Gold: world spot vs Kabul market, side by side ----------
+      // Kabul market = Kabul Gold Union rate per gram (Afaaq, 22 Nov 2026, published 12:52 Kabul).
+      (function(){
+        var el = document.getElementById("goldCompare");
+        if(!el) return;
+        var rows = [
+          {n:"۲۲ قیراط (916)", f:0.916, kabul:7680},
+          {n:"۲۱ قیراط (875)", f:0.875, kabul:7390},
+          {n:"۱۸ قیراط (750)", f:0.750, kabul:6300},
+          {n:"۱۴ قیراط (585)", f:0.585, kabul:5050}
+        ];
+        var pureAfn = GOLD.spotUSD / 31.1035 * GOLD.usdAfn; // AFN per gram, 24K spot
+        function fmt(x){ return Math.round(x).toLocaleString("en-US"); }
+        el.innerHTML = rows.map(function(r){
+          var sg = pureAfn * r.f;
+          return '<tr><td><b>'+r.n+'</b></td>'
+            + '<td class="num lbl" data-l="سپاټ — ګرام">'+fmt(sg)+'</td>'
+            + '<td class="rate num lbl" data-l="کابل بازار — ګرام">'+fmt(r.kabul)+'</td>'
+            + '<td class="num lbl" data-l="سپاټ — توله">'+fmt(sg*11.6638)+'</td>'
+            + '<td class="num lbl" data-l="کابل بازار — توله">'+fmt(r.kabul*11.6638)+'</td></tr>';
+        }).join("");
+      })();
+
+      // ---------- Converter quick amounts (زر / لک / میلیون) ----------
+      (function(){
+        var chips = document.querySelectorAll(".chipbtn");
+        for(var i=0;i<chips.length;i++){
+          (function(b){
+            b.addEventListener("click", function(){
+              document.getElementById("amt").value = b.getAttribute("data-amt");
+              convert();
+            });
+          })(chips[i]);
+        }
+      })();
+
+      // ---------- LIVE digital currency prices (native cards, no external widgets) ----------
+      // Snapshot: CoinGecko /coins/markets, 23 Nov 2026, 10:39 Kabul — all 21 currencies
+      // carry a real price + 24h change, so the grid is never blank or dashed. TON: CoinGecko
+      // returned no quote, so its snapshot is the Coinbase figure ($0.9845, +4.91%).
+      // Live refresh every 60s: CoinGecko (primary) -> Kraken -> Coinbase.
+      var LIVE_COINS = [
+        {s:"BTC", cg:"bitcoin", kp:"XBTUSD", cb:"BTC", name:"بټکوین — Bitcoin", color:"#f7931a", p:61654, c:4.39},
+        {s:"ETH", cg:"ethereum", kp:"ETHUSD", cb:"ETH", name:"ایتیریم — Ethereum", color:"#627eea", p:1728.74, c:4.15},
+        {s:"BNB", cg:"binancecoin", kp:null, cb:null, name:"بایننس — BNB", color:"#c99400", p:559.69, c:3.76},
+        {s:"SOL", cg:"solana", kp:"SOLUSD", cb:"SOL", name:"سولانا — Solana", color:"#0e9f6e", p:71.92, c:4.13},
+        {s:"XRP", cg:"ripple", kp:"XRPUSD", cb:"XRP", name:"ایکس آر پي — XRP", color:"#4a6fa5", p:0.941799, c:2.77},
+        {s:"USDT", cg:"tether", kp:"USDTUSD", cb:"USDT", name:"ټیټر — Tether", color:"#26a17b", p:0.998794, c:0.04},
+        {s:"USDC", cg:"usd-coin", kp:"USDCUSD", cb:"USDC", name:"USD Coin — USDC", color:"#2775ca", p:0.999404, c:0.02},
+        {s:"DOGE", cg:"dogecoin", kp:"DOGEUSD", cb:"DOGE", name:"ډاجکوین — Dogecoin", color:"#b8860b", p:0.055716, c:3.01},
+        {s:"ADA", cg:"cardano", kp:"ADAUSD", cb:"ADA", name:"کارډانو — Cardano", color:"#0033ad", p:0.145866, c:3.02},
+        {s:"TRX", cg:"tron", kp:"TRXUSD", cb:null, name:"ټرون — TRON", color:"#c0272d", p:0.304977, c:0.39},
+        {s:"LINK", cg:"chainlink", kp:"LINKUSD", cb:"LINK", name:"چین‌لینک — Chainlink", color:"#2a5ada", p:8.93, c:4.69},
+        {s:"ENA", cg:"ethena", kp:null, cb:"ENA", name:"ایتینا — Ethena", color:"#3a3f4a", p:0.103515, c:5.79},
+        {s:"TON", cg:"the-open-network", kp:null, cb:"TON", name:"ټونکوین — Toncoin", color:"#0098ea", p:0.9845, c:4.91},
+        {s:"LTC", cg:"litecoin", kp:"LTCUSD", cb:"LTC", name:"لایټکوین — Litecoin", color:"#345d9d", p:40.81, c:4.54},
+        {s:"DOT", cg:"polkadot", kp:"DOTUSD", cb:"DOT", name:"پولکاډاټ — Polkadot", color:"#e6007a", p:0.670352, c:4.18},
+        {s:"AVAX", cg:"avalanche-2", kp:"AVAXUSD", cb:"AVAX", name:"اوالانچ — Avalanche", color:"#e84142", p:6.70, c:2.94},
+        {s:"NEAR", cg:"near", kp:"NEARUSD", cb:"NEAR", name:"نییر — NEAR", color:"#0e7a5f", p:3.01, c:5.33},
+        {s:"SUI", cg:"sui", kp:"SUIUSD", cb:"SUI", name:"سوی — Sui", color:"#4da2ff", p:0.666482, c:4.57},
+        {s:"SHIB", cg:"shiba-inu", kp:"SHIBUSD", cb:"SHIB", name:"شیبا اینو — Shiba Inu", color:"#cc7a00", p:0.00000362, c:1.11},
+        {s:"UNI", cg:"uniswap", kp:"UNIUSD", cb:"UNI", name:"یونيسواپ — Uniswap", color:"#d6006d", p:4.80, c:4.01},
+        {s:"PEPE", cg:"pepe", kp:null, cb:"PEPE", name:"پیپي — Pepe", color:"#3d8130", p:0.00000345, c:3.18}
+      ];
+      function fmtPrice(p){
+        if(p == null || isNaN(p)) return "—";
+        if(p >= 100) return "$" + p.toLocaleString("en-US",{minimumFractionDigits:2, maximumFractionDigits:2});
+        if(p >= 1) return "$" + p.toFixed(2);
+        if(p >= 0.1) return "$" + p.toFixed(4);
+        if(p >= 0.01) return "$" + p.toFixed(5);
+        if(p >= 0.001) return "$" + p.toFixed(6);
+        return "$" + p.toFixed(8);
+      }
+      function fmtChg(c){
+        if(c == null || isNaN(c)) return "";
+        var arrow = c > 0 ? "▲" : (c < 0 ? "▼" : "•");
+        return arrow + " " + Math.abs(c).toFixed(2) + "%";
+      }
+      (function(){
+        var grid = document.getElementById("liveGrid");
+        if(!grid) return;
+        grid.innerHTML = LIVE_COINS.map(function(cn){
+          return '<div class="livecard" data-live="'+cn.s+'">'
+            + '<span class="sym" style="background:'+cn.color+'">'+cn.s+'</span>'
+            + '<div><div class="nm">'+cn.name+'</div>'
+            + '<div class="pr num lp">'+fmtPrice(cn.p)+'</div>'
+            + '<div class="ch num lc '+(cn.c > 0 ? "up" : (cn.c < 0 ? "down" : ""))+'">'+(cn.c == null ? "۲۴ ساعته بدلون: —" : "۲۴ ساعته: " + fmtChg(cn.c))+'</div>'
+            + '</div></div>';
+        }).join("");
+      })();
+      // ---------- Offline persistence: last prices actually seen online ----------
+      // Saved on every successful refresh; restored only when a refresh fails
+      // (offline), and only if newer than the baked snapshot (23 Nov 2026, 10:39 Kabul).
+      var SNAPSHOT_EPOCH = Date.UTC(2026, 10, 23, 6, 9); // 10:39 Kabul = 06:09 UTC
+      var seenPrices = {};
+      function saveSeenPrices(source){
+        try{
+          localStorage.setItem("afr_prices_v1", JSON.stringify({ t: Date.now(), src: source || "", prices: seenPrices }));
+          localStorage.setItem("afr_last_online", String(Date.now()));
+        }catch(e){}
+      }
+      function restoreSeenPrices(){
+        try{
+          var raw = localStorage.getItem("afr_prices_v1");
+          if(!raw) return false;
+          var data = JSON.parse(raw);
+          if(!data || !data.t || data.t <= SNAPSHOT_EPOCH || !data.prices) return false;
+          var n = 0;
+          LIVE_COINS.forEach(function(cn){
+            var s = data.prices[cn.s];
+            if(s && s.p != null){ applyLive(cn.s, s.p, s.c); n++; }
+          });
+          if(!n) return false;
+          var when = new Date(data.t);
+          var label = "";
+          try{ label = when.toLocaleString("fa-AF", { timeZone: "Asia/Kabul" }); }
+          catch(e){ label = when.toLocaleString(); }
+          var wh = document.getElementById("liveWhen");
+          if(wh) wh.textContent = "وروستی خوندي شوي نرخونه — " + label + " (د کابل وخت)" + (data.src ? " · سرچینه: " + data.src : "");
+          return true;
+        }catch(e){ return false; }
+      }
+      function applyLive(sym, price, chg){
+        if(price != null) seenPrices[sym] = { p: price, c: (chg != null ? chg : (seenPrices[sym] ? seenPrices[sym].c : null)) };
+        var card = document.querySelector('[data-live="'+sym+'"]');
+        if(!card) return;
+        var lp = card.querySelector(".lp"), lc = card.querySelector(".lc");
+        if(lp && price != null) lp.textContent = fmtPrice(price);
+        if(lc && chg != null){
+          lc.textContent = "۲۴ ساعته: " + fmtChg(chg);
+          lc.className = "ch num lc " + (chg > 0 ? "up" : (chg < 0 ? "down" : ""));
+        }
+      }
+      function kabulTime(){
+        try{ return new Date().toLocaleTimeString("en-GB",{timeZone:"Asia/Kabul", hour:"2-digit", minute:"2-digit", second:"2-digit"}); }
+        catch(e){ return new Date().toLocaleTimeString("en-GB"); }
+      }
+      function liveOk(source){
+        var wh = document.getElementById("liveWhen");
+        if(wh) wh.textContent = "وروستی تازه: " + kabulTime() + " — د کابل وخت";
+        saveSeenPrices(source);
+        try{ localStorage.setItem("afr_page_seen", String(Date.now())); }catch(e){}
+      }
+      function liveFail(){
+        // Offline / all sources failed: show the last prices the user actually
+        // saw online (if newer than the snapshot). Numbers are never invented.
+        restoreSeenPrices();
+      }
+      // Primary: CoinGecko /coins/markets — one call, all 21 coins, CORS enabled.
+      function fetchCoinGecko(){
+        var ids = LIVE_COINS.map(function(cn){ return cn.cg; }).join(",");
+        var url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=" + ids + "&price_change_percentage=24h";
+        return fetch(url).then(function(r){
+          if(!r.ok) throw new Error("http " + r.status);
+          return r.json();
+        }).then(function(rows){
+          if(!rows || !rows.length) throw new Error("empty");
+          var byId = {};
+          rows.forEach(function(row){ byId[row.id] = row; });
+          var got = 0;
+          LIVE_COINS.forEach(function(cn){
+            var row = byId[cn.cg];
+            if(row && row.current_price != null){
+              var chg = (row.price_change_percentage_24h_in_currency != null)
+                ? row.price_change_percentage_24h_in_currency : row.price_change_percentage_24h;
+              applyLive(cn.s, row.current_price, chg);
+              got++;
+            }
+          });
+          if(got < 10) throw new Error("too few: " + got);
+          return "CoinGecko";
+        });
+      }
+      // Fallback 1: Kraken public Ticker — one call, CORS enabled.
+      function fetchKraken(){
+        var pairs = [];
+        LIVE_COINS.forEach(function(cn){ if(cn.kp) pairs.push(cn.kp); });
+        var url = "https://api.kraken.com/0/public/Ticker?pair=" + pairs.join(",");
+        return fetch(url).then(function(r){
+          if(!r.ok) throw new Error("http " + r.status);
+          return r.json();
+        }).then(function(data){
+          if(!data || data.error && data.error.length || !data.result) throw new Error("kraken error");
+          var keys = Object.keys(data.result);
+          var got = 0;
+          LIVE_COINS.forEach(function(cn){
+            if(!cn.kp) return;
+            var alias = cn.s === "BTC" ? "XBT" : cn.s;
+            var key = null;
+            for(var i=0;i<keys.length;i++){
+              if(keys[i].indexOf(alias) >= 0 && /USD$/.test(keys[i])){ key = keys[i]; break; }
+            }
+            if(!key) return;
+            var e = data.result[key];
+            var last = parseFloat(e.c && e.c[0]);
+            var open = parseFloat(Object.prototype.toString.call(e.o) === "[object Array]" ? e.o[0] : e.o);
+            if(!isNaN(last) && last > 0){
+              var chg = (!isNaN(open) && open > 0) ? (last - open) / open * 100 : null;
+              applyLive(cn.s, last, chg);
+              got++;
+            }
+          });
+          if(got < 8) throw new Error("too few: " + got);
+          return "Kraken";
+        });
+      }
+      // Fallback 2: Coinbase Exchange public stats — one request per coin, CORS enabled.
+      function fetchCoinbase(){
+        var jobs = LIVE_COINS.filter(function(cn){ return !!cn.cb; }).map(function(cn){
+          return fetch("https://api.exchange.coinbase.com/products/" + cn.cb + "-USD/stats")
+            .then(function(r){ if(!r.ok) throw new Error("http"); return r.json(); })
+            .then(function(d){
+              var last = parseFloat(d.last), open = parseFloat(d.open);
+              if(isNaN(last) || last <= 0) return 0;
+              var chg = (!isNaN(open) && open > 0) ? (last - open) / open * 100 : null;
+              applyLive(cn.s, last, chg);
+              return 1;
+            })
+            .catch(function(){ return 0; });
+        });
+        return Promise.all(jobs).then(function(res){
+          var got = res.reduce(function(a,b){ return a + b; }, 0);
+          if(got < 8) throw new Error("too few: " + got);
+          return "Coinbase";
+        });
+      }
+      var liveBusy = false;
+      function fetchLive(){
+        if(liveBusy) return;
+        liveBusy = true;
+        fetchCoinGecko()
+          .catch(function(){ return fetchKraken(); })
+          .catch(function(){ return fetchCoinbase(); })
+          .then(function(source){ liveOk(source); })
+          .catch(liveFail)
+          .then(function(){ liveBusy = false; }, function(){ liveBusy = false; });
+      }
+      fetchLive();
+      setInterval(fetchLive, 60000);
+
+      // ---------- Pages: one section-group shown at a time, top-to-bottom ----------
+      var PAGES = [
+        {key:"sarafi",  ids:["sarafi","cities","history","converter"]},
+        {key:"crypto",  ids:["crypto"]},
+        {key:"coins",   ids:["coin-info"]},
+        {key:"metals",  ids:["metals","weights"]},
+        {key:"fuel",    ids:["fuel"]},
+        {key:"outlook", ids:["outlook","currency-value"]},
+        {key:"sources", ids:["sources"]},
+        {key:"about",   ids:["about"]}
+      ];
+      (function(){
+        var first = document.getElementById("sarafi");
+        if(!first) return;
+        var parent = first.parentNode;
+        var pageEls = {};
+        // create all page containers first, in order
+        PAGES.forEach(function(pg){
+          var d = document.createElement("div");
+          d.className = "page";
+          d.id = "page-" + pg.key;
+          parent.insertBefore(d, first);
+          pageEls[pg.key] = d;
+        });
+        // then move each section into its page
+        PAGES.forEach(function(pg){
+          pg.ids.forEach(function(id){
+            var s = document.getElementById(id);
+            if(s) pageEls[pg.key].appendChild(s);
+          });
+        });
+        var btns = document.querySelectorAll(".tabbtn");
+        function show(key, scroll){
+          PAGES.forEach(function(pg){
+            if(pageEls[pg.key]) pageEls[pg.key].classList.toggle("active", pg.key === key);
+          });
+          for(var i=0;i<btns.length;i++){
+            btns[i].classList.toggle("active", btns[i].getAttribute("data-page") === key);
+          }
+          if(key === "crypto"){ fetchLive(); }
+          if(scroll !== false) window.scrollTo({top:0, behavior:"smooth"});
+        }
+        for(var i=0;i<btns.length;i++){
+          (function(b){
+            b.addEventListener("click", function(){ show(b.getAttribute("data-page")); });
+          })(btns[i]);
+        }
+        // deep link: open the page that contains the hashed section
+        var h = (location.hash || "").replace("#","");
+        var start = "sarafi", target = null;
+        PAGES.forEach(function(pg){
+          if(pg.ids.indexOf(h) >= 0){ start = pg.key; target = h; }
+        });
+        show(start, false);
+        if(target){
+          var t = document.getElementById(target);
+          if(t) setTimeout(function(){ t.scrollIntoView(); }, 80);
+        }
+      })();
+    </script>
+    <script>
+      // ---------- Service worker + offline note ----------
+      (function(){
+        // Service worker: caches the whole page + assets on first online visit;
+        // network-first for the page, so online the app always shows the site's
+        // newest version — any section added to the site appears in the app by itself.
+        if("serviceWorker" in navigator){
+          window.addEventListener("load", function(){
+            navigator.serviceWorker.register("assets/sw.js", { scope: "./" })
+              .catch(function(){ return navigator.serviceWorker.register("assets/sw.js"); })
+              .catch(function(){ /* page still works as a normal website */ });
+          });
+        }
+
+        // Record when the page was last seen online (for the offline note).
+        if(navigator.onLine){
+          try{ localStorage.setItem("afr_page_seen", String(Date.now())); }catch(e){}
+        }
+
+        // ----- Offline note: one honest line with the saved copy's date/time -----
+        var note = document.getElementById("offlineNote");
+        function savedLabel(){
+          var t = 0;
+          try{ t = parseInt(localStorage.getItem("afr_page_seen") || localStorage.getItem("afr_last_online") || "0", 10) || 0; }catch(e){}
+          if(!t) return "دوشنبه، ۲۳ نومبر ۲۰۲۶ · ۱۰:۳۹ (د کابل وخت)";
+          var d = new Date(t), s = "";
+          try{ s = d.toLocaleString("fa-AF", { timeZone: "Asia/Kabul" }); }catch(e){ s = d.toLocaleString(); }
+          return s + " (د کابل وخت)";
+        }
+        function refreshOfflineNote(){
+          if(!note) return;
+          if(navigator.onLine){
+            note.classList.remove("show");
+            note.textContent = "";
+          } else {
+            note.textContent = "تاسو آفلاین یاست — دا وروستی خوندي شوی نقل دی: " + savedLabel();
+            note.classList.add("show");
+          }
+        }
+        window.addEventListener("offline", refreshOfflineNote);
+        window.addEventListener("online", refreshOfflineNote);
+        refreshOfflineNote();
+      })();
+    </script>
+    <script>
+      // ---------- Site search: index built from the page's actual content ----------
+      // Sections, cards, live-price cards, city headings and table rows are read
+      // from the rendered DOM, so the index stays correct whenever content changes.
+      (function(){
+        var input = document.getElementById("siteSearch");
+        var resultsBox = document.getElementById("searchResults");
+        var noneEl = document.getElementById("searchNone");
+        var navBtn = document.getElementById("searchNavBtn");
+        if(!input || !resultsBox) return;
+
+        if(navBtn){
+          navBtn.addEventListener("click", function(){
+            var box = document.getElementById("searchBox");
+            if(box) box.scrollIntoView({ behavior:"smooth", block:"start" });
+            setTimeout(function(){ input.focus(); }, 350);
+          });
+        }
+
+        function norm(s){
+          return (s || "").toLowerCase()
+            .replace(/[\u064B-\u0652\u0670]/g, "")
+            .replace(/[يى]/g, "ی")
+            .replace(/ك/g, "ک")
+            .replace(/ة/g, "ه")
+            .replace(/[\u200c\u200d]/g, "")
+            .replace(/\s+/g, " ")
+            .trim();
+        }
+        function pageKeyOf(el){
+          var p = el.closest ? el.closest(".page") : null;
+          return p ? p.id.replace("page-", "") : null;
+        }
+        function sectionLabelOf(el){
+          var sec = el.closest ? el.closest("section") : null;
+          if(sec){
+            var h = sec.querySelector(".sec-head h2");
+            if(h) return h.textContent.trim();
+          }
+          return "";
+        }
+        function shortTitle(t){
+          t = (t || "").replace(/\s+/g, " ").trim();
+          return t.length > 80 ? t.slice(0, 80) + "…" : t;
+        }
+
+        var index = null;
+        function buildIndex(){
+          index = [];
+          var seen = [];
+          function add(el, title){
+            if(!el || seen.indexOf(el) >= 0) return;
+            var text = norm(el.textContent);
+            if(!text || !title) return;
+            seen.push(el);
+            index.push({ el: el, title: shortTitle(title), titleN: norm(title), text: text, page: pageKeyOf(el), sec: sectionLabelOf(el) });
+          }
+          var i, els;
+          // section headings
+          els = document.querySelectorAll("section .sec-head");
+          for(i = 0; i < els.length; i++){
+            var h2 = els[i].querySelector("h2");
+            if(h2) add(els[i], h2.textContent);
+          }
+          // city headings (Kabul, Herat, Kandahar…)
+          els = document.querySelectorAll("#cityTables h3");
+          for(i = 0; i < els.length; i++) add(els[i], els[i].textContent);
+          // live digital-currency cards (Pashto name, English name, symbol)
+          els = document.querySelectorAll(".livecard");
+          for(i = 0; i < els.length; i++){
+            var nm = els[i].querySelector(".nm");
+            add(els[i], nm ? nm.textContent : els[i].textContent);
+          }
+          // content cards (coin profiles, metals, fuel, outlook, about…)
+          els = document.querySelectorAll("section .card");
+          for(i = 0; i < els.length; i++){
+            var h3 = els[i].querySelector("h3");
+            add(els[i], h3 ? h3.textContent : sectionLabelOf(els[i]));
+          }
+          // table rows (sarafi currencies, gold karats, weights, history…)
+          els = document.querySelectorAll("section tbody tr");
+          for(i = 0; i < els.length; i++){
+            var first = els[i].querySelector("td");
+            if(first) add(els[i], first.textContent);
+          }
+        }
+
+        function goTo(item){
+          resultsBox.hidden = true;
+          noneEl.hidden = true;
+          if(item.page){
+            var btn = document.querySelector('.tabbtn[data-page="' + item.page + '"]');
+            if(btn && !btn.classList.contains("active")) btn.click();
+          }
+          var el = item.el;
+          setTimeout(function(){
+            var det = el.closest ? el.closest("details") : null;
+            if(det) det.open = true;
+            el.scrollIntoView({ behavior:"smooth", block:"center" });
+            el.classList.remove("search-hit");
+            void el.offsetWidth;
+            el.classList.add("search-hit");
+            setTimeout(function(){ el.classList.remove("search-hit"); }, 2800);
+          }, 420);
+        }
+
+        function runSearch(){
+          var q = norm(input.value);
+          resultsBox.innerHTML = "";
+          if(q.length < 2){
+            resultsBox.hidden = true;
+            noneEl.hidden = true;
+            return;
+          }
+          if(!index) buildIndex();
+          var tokens = q.split(" ");
+          var hits = [];
+          for(var i = 0; i < index.length; i++){
+            var it = index[i], score = -1;
+            if(it.titleN.indexOf(q) === 0) score = 3;
+            else if(it.titleN.indexOf(q) >= 0) score = 2;
+            else if(it.text.indexOf(q) >= 0) score = 1;
+            else {
+              var all = true;
+              for(var t = 0; t < tokens.length; t++){
+                if(it.text.indexOf(tokens[t]) < 0){ all = false; break; }
+              }
+              if(all && tokens.length > 1) score = 0;
+            }
+            if(score >= 0) hits.push({ it: it, score: score });
+          }
+          hits.sort(function(a, b){ return b.score - a.score; });
+          hits = hits.slice(0, 12);
+          if(!hits.length){
+            resultsBox.hidden = true;
+            noneEl.hidden = false;
+            return;
+          }
+          noneEl.hidden = true;
+          hits.forEach(function(h){
+            var b = document.createElement("button");
+            b.type = "button";
+            b.className = "searchresult";
+            var title = document.createElement("b");
+            title.textContent = h.it.title;
+            b.appendChild(title);
+            if(h.it.sec && norm(h.it.sec) !== h.it.titleN){
+              var s = document.createElement("span");
+              s.textContent = h.it.sec;
+              b.appendChild(s);
+            }
+            (function(item){
+              b.addEventListener("click", function(){ goTo(item); });
+            })(h.it);
+            resultsBox.appendChild(b);
+          });
+          resultsBox.hidden = false;
+        }
+
+        input.addEventListener("input", runSearch);
+        input.addEventListener("keydown", function(e){
+          if(e.key === "Enter"){
+            e.preventDefault();
+            var first = resultsBox.querySelector(".searchresult");
+            if(first) first.click();
+          } else if(e.key === "Escape"){
+            input.value = "";
+            runSearch();
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
